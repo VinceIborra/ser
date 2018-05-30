@@ -89,5 +89,8 @@
   <ItemGroup>
     <EmbeddedResource Include="context.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Ser.Aws.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

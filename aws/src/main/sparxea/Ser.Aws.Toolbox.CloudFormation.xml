@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<UMLProfile profiletype="uml2">
+	<Documentation id="FA3F0B1D-2" name="CloudFormation" version="1.0" notes="CloudFormation"/>
+	<Content>
+		<Stereotypes>
+			<Stereotype name="AWS:S3:Website" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="ToolboxPage"/>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="CloudFormation::AWS_S3_Website_Configuration(UML::Class)" type="" description="" unit="" values="" default="Configuration"/>
+					<Tag name="CloudFormation::AWS_S3_Website_RedirectAllRequestsTo(UML::Class)" type="" description="" unit="" values="" default="Redirect All Requests To"/>
+					<Tag name="CloudFormation::AWS_S3_Website_RedirectRule(UML::Class)" type="" description="" unit="" values="" default="Redirect Rule"/>
+					<Tag name="CloudFormation::AWS_S3_Website_RoutingRule(UML::Class)" type="" description="" unit="" values="" default="Routing Rule"/>
+					<Tag name="CloudFormation::AWS_S3_Website_RoutingRuleCondition(UML::Class)" type="" description="" unit="" values="" default="Routing Rule Condition"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS:CloudFormation" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="ToolboxPage"/>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="CloudFormation::AWS_CloudFormation_Tag(UML::Class)" type="" description="" unit="" values="" default="Tag"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS:S3:Bucket" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="ToolboxPage"/>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="CloudFormation::AWS_S3_Bucket(UML::Class)" type="" description="" unit="" values="" default="Bucket"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_AbortIncompleteMultipartUpload(UML::Class)" type="" description="" unit="" values="" default="Abort Incomplete Multipart Upload"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_AccelerateConfiguration(UML::Class)" type="" description="" unit="" values="" default="Accelerate Configuration"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_AnalyticsConfiguration(UML::Class)" type="" description="" unit="" values="" default="Analytics Configuration"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_CorsConfiguration(UML::Class)" type="" description="" unit="" values="" default="Cors Configuration"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_CorsRule(UML::Class)" type="" description="" unit="" values="" default="Cors Rule"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_DataExport(UML::Class)" type="" description="" unit="" values="" default="Data Export"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_Destination(UML::Class)" type="" description="" unit="" values="" default="Destination"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_FilterRule(UML::Class)" type="" description="" unit="" values="" default="Filter Rule"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_InventoryConfiguration(UML::Class)" type="" description="" unit="" values="" default="Inventory Configuration"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_LambdaConfiguration(UML::Class)" type="" description="" unit="" values="" default="Lambda Configuration"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_LifecycleConfiguration(UML::Class)" type="" description="" unit="" values="" default="Lifecycle Configuration"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_LoggingConfiguration(UML::Class)" type="" description="" unit="" values="" default="Logging Configuration"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_MetricsConfiguration(UML::Class)" type="" description="" unit="" values="" default="Metrics Configuration"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_NoncurrentVersionTransition(UML::Class)" type="" description="" unit="" values="" default="Non Current Version Transition"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_NotificationConfiguration(UML::Class)" type="" description="" unit="" values="" default="Notification Configuration"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_NotificationFilter(UML::Class)" type="" description="" unit="" values="" default="Notification Filter"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_QueueConfiguration(UML::Class)" type="" description="" unit="" values="" default="Queue Configuration"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_ReplicationConfiguration(UML::Class)" type="" description="" unit="" values="" default="Replication Configuration"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_ReplicationDestination(UML::Class)" type="" description="" unit="" values="" default="Replication Destination"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_ReplicationRule(UML::Class)" type="" description="" unit="" values="" default="Replication Rule"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_Rule(UML::Class)" type="" description="" unit="" values="" default="Rule"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_S3KeyFilter(UML::Class)" type="" description="" unit="" values="" default="S3 Key Filter"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_StorageClassAnalysis(UML::Class)" type="" description="" unit="" values="" default="Storage Class Analysis"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_TagFilter(UML::Class)" type="" description="" unit="" values="" default="Tag Filter"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_TopicConfiguration(UML::Class)" type="" description="" unit="" values="" default="Topic Configuration"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_Transition(UML::Class)" type="" description="" unit="" values="" default="Transition"/>
+					<Tag name="CloudFormation::AWS_S3_Bucket_VersioningConfiguration(UML::Class)" type="" description="" unit="" values="" default="Versioning Configuration"/>
+				</TaggedValues>
+			</Stereotype>
+		</Stereotypes>
+		<TaggedValueTypes/>
+		<ViewDefinitions/>
+		<Metamodel/>
+	</Content>
+</UMLProfile>

@@ -10,6 +10,10 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.IO;
+using System.Reflection;
+
+using Common.Logging;
+using Common.Logging.Configuration;
 
 using Spring.Context;
 using Spring.Context.Support;
@@ -40,8 +44,36 @@ namespace Ser.Aws {
 			//No special processing required.
 			return "a string";
 		}
-		
-		public object ProcessOperation(EA.Repository repository, object array) {
+
+        public object EA_OnInitializeTechnologies(EA.Repository repository) {
+            string technology = "";
+
+            Assembly assem = this.GetType().Assembly;
+
+            using (Stream stream = assem.GetManifestResourceStream("Ser.Aws.Ser.Aws.xml")) {
+
+                try {
+
+                    using (StreamReader reader = new StreamReader(stream)) {
+
+                        technology = reader.ReadToEnd();
+
+                    }
+
+                }
+
+                catch (Exception e) {
+
+                    System.Windows.Forms.MessageBox.Show("Error Initializing Technology");
+
+                }
+
+            }
+
+            return technology;
+        }
+
+        public object ProcessOperation(EA.Repository repository, object array) {
 			string elementGuid = ((string[]) array)[0];
 			EA.Project project = repository.GetProjectInterface();
 			bool ret = project.GenerateClass (elementGuid, "overwrite=1");
@@ -166,8 +198,19 @@ namespace Ser.Aws {
 					break;					
 
 				case "Menu2":
+                    // create properties
+                    NameValueCollection properties = new NameValueCollection();
+                    properties["showDateTime"] = "true";
+
+                    // set Adapter
+                    //Common.Logging.LogManager.Adapter = new Common.Logging.Simple.ConsoleOutLoggerFactoryAdapter(properties);
+                    Common.Logging.LogManager.Adapter = new Common.Logging.Simple.TraceLoggerFactoryAdapter(properties);
+
                     IApplicationContext ctx = this.context;
-					break;
+
+                    ILog log = LogManager.GetLogger(this.GetType());
+                    log.Debug("hello world");
+                    break;
 
 				case "About...":
 					Form1 anAbout = new Form1();

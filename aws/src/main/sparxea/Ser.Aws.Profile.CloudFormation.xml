@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<UMLProfile profiletype="uml2">
+	<Documentation id="73CC3B61-2" name="CloudFormation" version="1.0" notes="CloudFormation"/>
+	<Content>
+		<Stereotypes>
+			<Stereotype name="AWS_CloudFormation_Tag" metatype="Tag" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="Key" type="" description="" unit="" values="" default=""/>
+					<Tag name="Value" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket" metatype="Bucket" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="AccessControl" type="" description="" unit="" values="" default=""/>
+					<Tag name="BucketName" type="" description="" unit="" values="" default=""/>
+					<Tag name="CorsConfiguration"/>
+					<Tag name="AccelerateConfiguration"/>
+					<Tag name="InventoryConfigurations"/>
+					<Tag name="AnalyticsConfigurations"/>
+					<Tag name="LifecycleConfiguration"/>
+					<Tag name="LoggingConfiguration"/>
+					<Tag name="MetricsConfigurations"/>
+					<Tag name="NotificationConfiguration"/>
+					<Tag name="ReplicationConfiguration"/>
+					<Tag name="Tags"/>
+					<Tag name="WebsiteConfiguration"/>
+					<Tag name="VersioningConfiguration"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_AbortIncompleteMultipartUpload" metatype="AbortIncompleteMultipartUpload" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="DaysAfterInitiation" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_AccelerateConfiguration" metatype="AccelerateConfiguration" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="AccelerationStatus" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_AnalyticsConfiguration" metatype="AnalyticsConfiguration" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="Id" type="" description="" unit="" values="" default=""/>
+					<Tag name="Prefix" type="" description="" unit="" values="" default=""/>
+					<Tag name="StorageClassAnalysis"/>
+					<Tag name="TagFilters"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_CorsConfiguration" metatype="CorsConfiguration" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="CorsRules"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_CorsRule" metatype="CorsRule" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="AllowedHeaders" type="" description="" unit="" values="" default=""/>
+					<Tag name="AllowedMethods" type="" description="" unit="" values="" default=""/>
+					<Tag name="ExposedHeaders" type="" description="" unit="" values="" default=""/>
+					<Tag name="Ïd" type="" description="" unit="" values="" default=""/>
+					<Tag name="MaxAge" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_DataExport" metatype="DataExport" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="OutputSchemaVersion" type="" description="" unit="" values="" default=""/>
+					<Tag name="Destination"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_Destination" metatype="Destination" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="BucketAccountId" type="" description="" unit="" values="" default=""/>
+					<Tag name="BucketArn" type="" description="" unit="" values="" default=""/>
+					<Tag name="Format" type="" description="" unit="" values="" default=""/>
+					<Tag name="Prefix" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_FilterRule" metatype="FilterRule" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="Name" type="" description="" unit="" values="" default=""/>
+					<Tag name="Value" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_InventoryConfiguration" metatype="InventoryConfiguration" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="Enabled" type="" description="" unit="" values="" default=""/>
+					<Tag name="Id" type="" description="" unit="" values="" default=""/>
+					<Tag name="IncludedObjectVersions" type="" description="" unit="" values="" default=""/>
+					<Tag name="OptionalFields" type="" description="" unit="" values="" default=""/>
+					<Tag name="Prefix" type="" description="" unit="" values="" default=""/>
+					<Tag name="ScheduleFrequency" type="" description="" unit="" values="" default=""/>
+					<Tag name="Destination"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_LambdaConfiguration" metatype="LambdaConfiguration" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="Event" type="" description="" unit="" values="" default=""/>
+					<Tag name="Function" type="" description="" unit="" values="" default=""/>
+					<Tag name="Filter"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_LifecycleConfiguration" metatype="LifecycleConfiguration" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="Rules"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_LoggingConfiguration" metatype="LoggingConfiguration" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="DestinationBucketName" type="" description="" unit="" values="" default=""/>
+					<Tag name="LogFilePrefix" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_MetricsConfiguration" metatype="MetricsConfiguration" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="Id" type="" description="" unit="" values="" default=""/>
+					<Tag name="Prefix" type="" description="" unit="" values="" default=""/>
+					<Tag name="TagFilters"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_NoncurrentVersionTransition" metatype="NoncurrentVersionTransition" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="StorageClass" type="" description="" unit="" values="" default=""/>
+					<Tag name="TransitionInDays" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_NotificationConfiguration" metatype="NotificationConfiguration" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="QueueConfigurations"/>
+					<Tag name="LambdaConfigurations"/>
+					<Tag name="TopicConfigurations"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_NotificationFilter" metatype="NotificationFilter" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="S3Key"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_QueueConfiguration" metatype="QueueConfiguration" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="Event" type="" description="" unit="" values="" default=""/>
+					<Tag name="Queue" type="" description="" unit="" values="" default=""/>
+					<Tag name="Filter"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_ReplicationConfiguration" metatype="ReplicationConfiguration" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="Role" type="" description="" unit="" values="" default=""/>
+					<Tag name="Rules"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_ReplicationDestination" metatype="ReplicationDestination" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="Bucket" type="" description="" unit="" values="" default=""/>
+					<Tag name="StorageClass" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_ReplicationRule" metatype="ReplicationRule" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="Id" type="" description="" unit="" values="" default=""/>
+					<Tag name="Prefix" type="" description="" unit="" values="" default=""/>
+					<Tag name="Status" type="" description="" unit="" values="" default=""/>
+					<Tag name="Destination"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_Rule" metatype="Rule" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="ExpirationDate" type="" description="" unit="" values="" default=""/>
+					<Tag name="ExpirationInDays" type="" description="" unit="" values="" default=""/>
+					<Tag name="Id" type="" description="" unit="" values="" default=""/>
+					<Tag name="NoncurrentVersionExpirationInDays" type="" description="" unit="" values="" default=""/>
+					<Tag name="Prefix" type="" description="" unit="" values="" default=""/>
+					<Tag name="Status" type="" description="" unit="" values="" default=""/>
+					<Tag name="Transitions"/>
+					<Tag name="NoncurrentVersionTransitions"/>
+					<Tag name="TagFilters"/>
+					<Tag name="AbortIncompleteMultipartUpload"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_S3KeyFilter" metatype="S3KeyFilter" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="Rules"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_StorageClassAnalysis" metatype="StorageClassAnalysis" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="DataExport"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_TagFilter" metatype="TagFilter" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="Key" type="" description="" unit="" values="" default=""/>
+					<Tag name="Value" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_TopicConfiguration" metatype="TopicConfiguration" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="Event" type="" description="" unit="" values="" default=""/>
+					<Tag name="Topic" type="" description="" unit="" values="" default=""/>
+					<Tag name="Filter"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_Transition" metatype="Transition" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="StorageClass" type="" description="" unit="" values="" default=""/>
+					<Tag name="TransitionDate" type="" description="" unit="" values="" default=""/>
+					<Tag name="TransitionInDays" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Bucket_VersioningConfiguration" metatype="VersioningConfiguration" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="Status" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Website_Configuration" metatype="Configuration" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="ErrorDocument" type="" description="" unit="" values="" default=""/>
+					<Tag name="IndexDocument" type="" description="" unit="" values="" default=""/>
+					<Tag name="RoutingRules"/>
+					<Tag name="RedirectAllRequestsTo"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Website_RedirectAllRequestsTo" metatype="RedirectAllRequestsTo" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="HostName" type="" description="" unit="" values="" default=""/>
+					<Tag name="Protocol" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Website_RedirectRule" metatype="RedirectRule" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="HostName" type="" description="" unit="" values="" default=""/>
+					<Tag name="HttpRedirectCode" type="" description="" unit="" values="" default=""/>
+					<Tag name="Protocol" type="" description="" unit="" values="" default=""/>
+					<Tag name="ReplaceKeyPrefixWith" type="" description="" unit="" values="" default=""/>
+					<Tag name="ReplaceKeyWith" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Website_RoutingRule" metatype="RoutingRule" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="AWS_S3_Website_RedirectRule" type="" description="" unit="" values="" default=""/>
+					<Tag name="AWS_S3_Website_RoutingRuleCondition" type="" description="" unit="" values="" default=""/>
+					<Tag name="RoutingRuleCondition"/>
+					<Tag name="RedirectRule"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS_S3_Website_RoutingRuleCondition" metatype="RoutingRuleCondition" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="HttpErrorCodeReturnedEquals" type="" description="" unit="" values="" default=""/>
+					<Tag name="KeyPrefixEquals" type="" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+		</Stereotypes>
+		<TaggedValueTypes>
+			<TaggedValueType property="CorsConfiguration" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_CorsConfiguration;"/>
+			<TaggedValueType property="AccelerateConfiguration" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_AccelerateConfiguration;"/>
+			<TaggedValueType property="InventoryConfigurations" description="" notes="Type=RefGUIDList;Stereotypes=AWS_S3_Bucket_InventoryConfiguration;"/>
+			<TaggedValueType property="AnalyticsConfigurations" description="" notes="Type=RefGUIDList;Stereotypes=AWS_S3_Bucket_AnalyticsConfiguration;"/>
+			<TaggedValueType property="LifecycleConfiguration" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_LifecycleConfiguration;"/>
+			<TaggedValueType property="LoggingConfiguration" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_LoggingConfiguration;"/>
+			<TaggedValueType property="MetricsConfigurations" description="" notes="Type=RefGUIDList;Stereotypes=AWS_S3_Bucket_MetricsConfiguration;"/>
+			<TaggedValueType property="NotificationConfiguration" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_NotificationConfiguration;"/>
+			<TaggedValueType property="ReplicationConfiguration" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_ReplicationConfiguration;"/>
+			<TaggedValueType property="Tags" description="" notes="Type=RefGUIDList;Stereotypes=AWS_CloudFormation_Tag;"/>
+			<TaggedValueType property="WebsiteConfiguration" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Website_Configuration;"/>
+			<TaggedValueType property="VersioningConfiguration" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_VersioningConfiguration;"/>
+			<TaggedValueType property="StorageClassAnalysis" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_StorageClassAnalysis;"/>
+			<TaggedValueType property="TagFilters" description="" notes="Type=RefGUIDList;Stereotypes=AWS_S3_Bucket_TagFilter;"/>
+			<TaggedValueType property="CorsRules" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_CorsRule;"/>
+			<TaggedValueType property="Destination" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_Destination;"/>
+			<TaggedValueType property="Filter" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_NotificationFilter;"/>
+			<TaggedValueType property="Rules" description="" notes="Type=RefGUIDList;Stereotypes=AWS_S3_Bucket_Rule;"/>
+			<TaggedValueType property="QueueConfigurations" description="" notes="Type=RefGUIDList;Stereotypes=AWS_S3_Bucket_QueueConfiguration;"/>
+			<TaggedValueType property="LambdaConfigurations" description="" notes="Type=RefGUIDList;Stereotypes=AWS_S3_Bucket_LambdaConfiguration;"/>
+			<TaggedValueType property="TopicConfigurations" description="" notes="Type=RefGUIDList;Stereotypes=AWS_S3_Bucket_TopicConfiguration;"/>
+			<TaggedValueType property="S3Key" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_S3KeyFilter;"/>
+			<TaggedValueType property="Transitions" description="" notes="Type=RefGUIDList;Stereotypes=AWS_S3_Bucket_Transition;"/>
+			<TaggedValueType property="NoncurrentVersionTransitions" description="" notes="Type=RefGUIDList;Stereotypes=AWS_S3_Bucket_NoncurrentVersionTransition;"/>
+			<TaggedValueType property="AbortIncompleteMultipartUpload" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_AbortIncompleteMultipartUpload;"/>
+			<TaggedValueType property="DataExport" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_DataExport;"/>
+			<TaggedValueType property="RoutingRules" description="" notes="Type=RefGUIDList;Stereotypes=AWS_S3_Website_RoutingRule;"/>
+			<TaggedValueType property="RedirectAllRequestsTo" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Website_RedirectAllRequestsTo;"/>
+			<TaggedValueType property="RoutingRuleCondition" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Website_RoutingRuleCondition;"/>
+			<TaggedValueType property="RedirectRule" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Website_RedirectRule;"/>
+		</TaggedValueTypes>
+		<ViewDefinitions/>
+		<Metamodel/>
+	</Content>
+</UMLProfile>
