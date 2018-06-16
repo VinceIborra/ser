@@ -16,20 +16,15 @@ using Amazon.S3.Model;
 using Amazon.Runtime;
 using Amazon.Runtime.CredentialManagement;
 
-namespace Vji.Bob {
+using EA;
+
+namespace Ser.Aws {
 
     class HelloAws {
 
-        public string GetServiceOutput() {
+        public AwsLoginInformation awsLoginInformation { set; get; } = null;
 
-            //var credentials = new StoredProfileAWSCredentials("vjisys");
-            var chain = new CredentialProfileStoreChain();
-            CredentialProfile basicProfile;
-            AWSCredentials credentials = null;
-            if (chain.TryGetProfile("default", out basicProfile)) {
-                // Use basicProfile
-                credentials = basicProfile.GetAWSCredentials(null);
-            }
+        private string GetEc2Info() {
 
             StringBuilder sb = new StringBuilder(1024);
             using (StringWriter sr = new StringWriter(sb)) {
@@ -38,12 +33,11 @@ namespace Vji.Bob {
                 sr.WriteLine("===========================================");
 
                 // Print the number of Amazon EC2 instances.
-                //IAmazonEC2 ec2 = new AmazonEC2Client();
-                IAmazonEC2 ec2 = new AmazonEC2Client(credentials, RegionEndpoint.APSoutheast2);
+                //IAmazonEC2 ec2 = new AmazonEC2Client(this.AwsCredentials, RegionEndpoint.APSoutheast2);
                 DescribeInstancesRequest ec2Request = new DescribeInstancesRequest();
 
                 try {
-                    DescribeInstancesResponse ec2Response = ec2.DescribeInstances(ec2Request);
+                    DescribeInstancesResponse ec2Response = this.awsLoginInformation.Ec2Client.DescribeInstances(ec2Request);
                     int numInstances = 0;
                     numInstances = ec2Response.Reservations.Count;
                     sr.WriteLine(string.Format("You have {0} Amazon EC2 instance(s) running in the {1} region.",
@@ -64,33 +58,84 @@ namespace Vji.Bob {
                 }
                 sr.WriteLine();
 
+            }
+            return sb.ToString();
+        }
 
-                // vjivjivji
-                //var vpcresponse = ec2.DescribeVpcs(new DescribeVpcsRequest {
-                //    VpcIds = new List<string> {
-                //    "vpc-ead45e8d "
-                //    }
-                //});
-                var vpcresponse = ec2.DescribeVpcs();
+        public Element createVpcModel(Package pkg, Vpc vpc) {
+            Element element = pkg.Elements.AddNew(vpc.VpcId.ToString(), "Class");
+            element.Update();
+            return element;
+        }
+
+        public void createSubnetModel(Package pkg, Subnet subnet, Element vpcElement) {
+
+            // Create Subnet element
+            Element subnetElement = pkg.Elements.AddNew(subnet.SubnetId.ToString(), "Class");
+            subnetElement.Update();
+
+            // Link it to the VPC element
+            Connector connector = vpcElement.Connectors.AddNew("has", "Aggregation");
+            connector.ClientID = subnetElement.ElementID;
+            connector.SupplierID = vpcElement.ElementID;
+            connector.Update();
+        }
+
+
+        //
+        //
+        //
+        public string GetVpcInfo(Package pkg) {
+            StringBuilder sb = new StringBuilder(1024);
+            using (StringWriter sr = new StringWriter(sb)) {
+                var vpcresponse = this.awsLoginInformation.Ec2Client.DescribeVpcs();
 
                 List<Vpc> vpcs = vpcresponse.Vpcs;
                 for (var idx = 0; idx < vpcs.Count; idx++) {
+
+                    // VPC
                     Vpc vpc = vpcs[idx];
+                    Element vpcElement = this.createVpcModel(pkg, vpc);
                     sr.WriteLine("VPC: " + vpc.ToString());
+                    sr.WriteLine("VPC Id:" + vpc.VpcId.ToString());
                     List<Amazon.EC2.Model.Tag> tags = vpc.Tags;
                     for (var jdx = 0; jdx < tags.Count; jdx++) {
                         Amazon.EC2.Model.Tag tag = tags[jdx];
                         sr.WriteLine("Key: " + tag.Key + ", Value: " + tag.Value);
                     }
+
+                    // Subnets
+                    var response = this.awsLoginInformation.Ec2Client.DescribeSubnets(new DescribeSubnetsRequest {
+                        Filters = new List<Amazon.EC2.Model.Filter> {
+                            new Amazon.EC2.Model.Filter  {
+                                Name = "vpc-id",
+                                Values = new List<string> {
+                                    vpc.VpcId.ToString()
+                                }
+                            }
+                        }
+                    });
+
+                    List<Subnet> subnets = response.Subnets;
+                    for (var jdx = 0; jdx < subnets.Count; jdx++) {
+                        Subnet subnet = subnets[idx];
+                        sr.WriteLine("SN: " + subnet.ToString());
+                        this.createSubnetModel(pkg, subnet, vpcElement);
+                    }
                 }
                 sr.WriteLine();
-                // vjivjivji
+            }
+            return sb.ToString();
 
+        }
 
+        public string GetSimpleDBDomainInfo() {
+            StringBuilder sb = new StringBuilder(1024);
+            using (StringWriter sr = new StringWriter(sb)) {
 
                 // Print the number of Amazon SimpleDB domains.
                 //IAmazonSimpleDB sdb = new AmazonSimpleDBClient();
-                IAmazonSimpleDB sdb = new AmazonSimpleDBClient(credentials, RegionEndpoint.APSoutheast2);
+                IAmazonSimpleDB sdb = new AmazonSimpleDBClient(this.awsLoginInformation.AwsCredentials, RegionEndpoint.APSoutheast2);
                 ListDomainsRequest sdbRequest = new ListDomainsRequest();
 
                 try {
@@ -116,9 +161,18 @@ namespace Vji.Bob {
                 }
                 sr.WriteLine();
 
+            }
+            return sb.ToString();
+        }
+
+        private string GetS3Info() {
+            StringBuilder sb = new StringBuilder(1024);
+            using (StringWriter sr = new StringWriter(sb)) {
+
+
                 // Print the number of Amazon S3 Buckets.
                 //IAmazonS3 s3Client = new AmazonS3Client();
-                IAmazonS3 s3Client = new AmazonS3Client(credentials, RegionEndpoint.APSoutheast2);
+                IAmazonS3 s3Client = new AmazonS3Client(this.awsLoginInformation.AwsCredentials, RegionEndpoint.APSoutheast2);
 
                 try {
                     ListBucketsResponse response = s3Client.ListBuckets();
@@ -145,6 +199,16 @@ namespace Vji.Bob {
                 sr.WriteLine("Press any key to continue...");
             }
             return sb.ToString();
+        }
+
+        public string GetServiceOutput(Package pkg) {
+
+            string ec2Info = this.GetEc2Info();
+            string vpcInfo = this.GetVpcInfo(pkg);
+            string simpleDBDomainInfo = this.GetSimpleDBDomainInfo();
+            string s3Info = this.GetS3Info();
+
+            return ec2Info + vpcInfo + simpleDBDomainInfo + s3Info;
         }
     }
 }

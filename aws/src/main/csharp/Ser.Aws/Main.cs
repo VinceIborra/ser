@@ -17,7 +17,10 @@ using Common.Logging.Configuration;
 
 using Spring.Context;
 using Spring.Context.Support;
-using Vji.Bob;
+
+using EA;
+
+using Ser.Aws;
 
 namespace Ser.Aws {
 
@@ -25,10 +28,10 @@ namespace Ser.Aws {
 
 		public string filecontents = "";
 		public bool readline = false;
-		private bool m_ShowFullMenus = false;
 		public Form1 theForm;
 
         private IApplicationContext _context = null;
+        private ILog _log = null;
 
         public IApplicationContext context {
             get {
@@ -39,8 +42,26 @@ namespace Ser.Aws {
             }
         }
 
-		//Called Before EA starts to check Add-In Exists
-		public String EA_Connect(EA.Repository Repository) {
+        private ILog log {
+            get {
+                if (this._log == null) {
+                    // create properties
+                    NameValueCollection properties = new NameValueCollection();
+                    properties["showDateTime"] = "true";
+
+                    // set Adapter
+                    //Common.Logging.LogManager.Adapter = new Common.Logging.Simple.ConsoleOutLoggerFactoryAdapter(properties);
+                    Common.Logging.LogManager.Adapter = new Common.Logging.Simple.TraceLoggerFactoryAdapter(properties);
+
+                    this._log = LogManager.GetLogger(this.GetType());
+                    this._log.Debug("initialisation done");
+                }
+                return this._log;
+            }
+        }
+
+        //Called Before EA starts to check Add-In Exists
+        public String EA_Connect(EA.Repository Repository) {
 			//No special processing required.
 			return "a string";
 		}
@@ -64,7 +85,7 @@ namespace Ser.Aws {
 
                 catch (Exception e) {
 
-                    System.Windows.Forms.MessageBox.Show("Error Initializing Technology");
+                    System.Windows.Forms.MessageBox.Show("Error Initializing Technology - " + e.ToString());
 
                 }
 
@@ -87,11 +108,6 @@ namespace Ser.Aws {
 			int connectorId = Convert.ToInt32(str);
 			EA.Connector connector = repository.GetConnectorByID(connectorId);
 			connector.Name = "vji";
-
-            HelloAws aws = new HelloAws();
-            string notes = aws.GetServiceOutput();
-            connector.Notes = notes;
-
             connector.Update();
             
 			return true;
@@ -104,9 +120,13 @@ namespace Ser.Aws {
 			switch( MenuName )
 			{
 				case "":
-					return "-&AWSS";
-				case "-&AWSS":
-					string[] ar = { "&Tagged CSV Export", "Menu2", "About..." };
+					return "-&Ser.Aws";
+				case "-&Ser.Aws":
+					string[] ar = {
+                        "Set Profile",
+                        "Import",
+                        "About..."
+                    };
 					return ar;
 			}
 			return "";
@@ -127,89 +147,55 @@ namespace Ser.Aws {
 		}
 
 		//Called once Menu has been opened to see what menu items are active.
-		public void EA_GetMenuState(EA.Repository Repository, string Location, string MenuName, string ItemName, ref bool IsEnabled, ref bool IsChecked)
-		{
-			if( IsProjectOpen(Repository) )
-			{
-                if (ItemName == "&Tagged CSV Export")
-                    IsChecked = m_ShowFullMenus;
-                else if (ItemName == "Menu2") {
-                    IsChecked = m_ShowFullMenus;
-                    //IsEnabled = m_ShowFullMenus;
-                }
-			}
-			else
-				// If no open project, disable all menu options
-				IsEnabled = false;
+		public void EA_GetMenuState(EA.Repository Repository, string Location, string MenuName, string ItemName, ref bool IsEnabled, ref bool IsChecked) {
+
+            // Assume everything is disabled to being with
+            IsEnabled = false;
+
+            // No menu items need to be checked at this point in development
+            IsChecked = false;
+
+            // Menu items not dependent on whether a repository has been opened 
+            if (ItemName == "Set Profile"
+            ||  ItemName == "About...") {
+                IsEnabled = true;
+                return;
+            }
+
+            // Rest of menu items requiring that a repository be opened
+            if (ItemName == "Import"
+            && IsProjectOpen(Repository)) {
+                IsEnabled = true;
+            }
 		}
 
-		//Called when user makes a selection in the menu.
-		//This is your main exit point to the rest of your Add-in
-		public void EA_MenuClick(EA.Repository Repository, string Location, string MenuName, string ItemName)
-		{						
-			switch( ItemName )
-			{
-				case "&Tagged CSV Export":	
+        //Called when user makes a selection in the menu.
+        //This is your main exit point to the rest of your Add-in
+        public void EA_MenuClick(EA.Repository Repository, string Location, string MenuName, string ItemName) {
 
-					String writerString;
-					String tagString;
+            switch (ItemName) {
 
-					tagString = "";
-					writerString = "";
+                case "Set Profile":
+                    this.log.Debug("Set Profile");
+                    SetProfileForm form = (SetProfileForm) this.context.GetObject("SetProfileForm");
+                    form.ShowDialog();
+                    break;
 
-					EA.Package aPackage;
-					aPackage = Repository.GetTreeSelectedPackage();
+                case "Import":
 
-					foreach(EA.Package thePackage in aPackage.Packages)
-					{
-						writerString = writerString + thePackage.Name.ToString() + "," + thePackage.ObjectType.ToString() + "\n";
-						//MessageBox.Show(writerString);
-						foreach(EA.Element theElements in thePackage.Elements)
-						{
-							foreach(EA.TaggedValue theTags in theElements.TaggedValues)
-							{	
-								tagString = tagString + theTags.Name.ToString() + "," + theTags.Value.ToString() + ",";
-							}
-							writerString = writerString + theElements.Name.ToString() + "," + theElements.ObjectType.ToString() + "," + tagString + "\n";
-							tagString = "";
-						}
-					}
+                    Package pkg = null;
+                    if (Location == "TreeView") {
 
-					foreach(EA.Element theElements in aPackage.Elements)
-					{
-						foreach(EA.TaggedValue theTags in theElements.TaggedValues)
-						{	
-							tagString = tagString + theTags.Name.ToString() + "," + theTags.Value.ToString() + ",";
-						}
-						writerString = writerString + theElements.Name.ToString() + "," + theElements.ObjectType.ToString() + "," + tagString;
-						tagString = "";
-					}
+                        // Get the current package
+                        pkg = Repository.GetTreeSelectedPackage();
 
-					
-					// create a writer and open the file
-					TextWriter tw = new StreamWriter("c:\\vji\\tmp\\" + aPackage.Name.ToString() + ".csv");
+                        // Query AWS
+                        HelloAws aws = (HelloAws)this.context.GetObject("HelloAws");
+                        string notes = aws.GetServiceOutput(pkg);
 
-					// write a line of text to the file
-					tw.WriteLine(writerString);
-
-					// close the stream
-					tw.Close();
-
-					break;					
-
-				case "Menu2":
-                    // create properties
-                    NameValueCollection properties = new NameValueCollection();
-                    properties["showDateTime"] = "true";
-
-                    // set Adapter
-                    //Common.Logging.LogManager.Adapter = new Common.Logging.Simple.ConsoleOutLoggerFactoryAdapter(properties);
-                    Common.Logging.LogManager.Adapter = new Common.Logging.Simple.TraceLoggerFactoryAdapter(properties);
-
-                    IApplicationContext ctx = this.context;
-
-                    ILog log = LogManager.GetLogger(this.GetType());
-                    log.Debug("hello world");
+                        // Debug
+                        //MessageBox.Show(notes);
+                    }
                     break;
 
 				case "About...":
@@ -217,22 +203,6 @@ namespace Ser.Aws {
 					anAbout.ShowDialog();					
 					break;
 			}
-		}
-		public bool readLine(StreamReader sreader)
-		{
-			bool answer;
-			answer = false;
-			
-			try
-			{
-				filecontents = filecontents + "\n" + sreader.ReadLine();
-			}
-			catch
-			{
-				answer = true;
-			}
-
-			return answer;
 		}
 	}
 }
