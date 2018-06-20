@@ -2,6 +2,7 @@
 using Amazon.Runtime;
 using Amazon.Runtime.CredentialManagement;
 using Amazon.EC2;
+using Amazon.RDS;
 
 namespace Ser.Aws {
     public class AwsLoginInformationImpl : AwsLoginInformation {
@@ -9,6 +10,7 @@ namespace Ser.Aws {
         private CredentialProfile _credentialProfile = null;
         private AWSCredentials _awsCredentials = null;
         private IAmazonEC2 _ec2Client = null;
+        private IAmazonRDS _rdsClient = null;
 
         public CredentialProfile credentialProfile {
             set {
@@ -42,6 +44,18 @@ namespace Ser.Aws {
                     _ec2Client = new AmazonEC2Client(this.AwsCredentials, RegionEndpoint.APSoutheast2);
                 }
                 return _ec2Client;
+            }
+        }
+
+        public IAmazonRDS RdsClient {
+            set {
+                _rdsClient = value;
+            }
+            get {
+                if (_rdsClient == null) {
+                    _rdsClient = new AmazonRDSClient(this.AwsCredentials, RegionEndpoint.APSoutheast2);
+                }
+                return _rdsClient;
             }
         }
     }

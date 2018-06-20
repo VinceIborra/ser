@@ -95,10 +95,12 @@ namespace Ser.Aws {
         }
 
         public object ProcessOperation(EA.Repository repository, object array) {
-			string elementGuid = ((string[]) array)[0];
-			EA.Project project = repository.GetProjectInterface();
-			bool ret = project.GenerateClass (elementGuid, "overwrite=1");
-			return "hello" + ret.ToString();
+            MessageBox.Show("hello");
+            //string elementGuid = ((string[]) array)[0];
+            //EA.Project project = repository.GetProjectInterface();
+            //bool ret = project.GenerateClass (elementGuid, "overwrite=1");
+            //return "hello" + ret.ToString();
+            return "hello";
 		}
 		
 		public bool EA_OnPostNewConnector(EA.Repository repository, EA.EventProperties info) {

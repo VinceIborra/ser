@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Caching;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,6 +14,7 @@ using Amazon.SimpleDB;
 using Amazon.SimpleDB.Model;
 using Amazon.S3;
 using Amazon.S3.Model;
+using Amazon.RDS.Model;
 using Amazon.Runtime;
 using Amazon.Runtime.CredentialManagement;
 
@@ -21,6 +23,17 @@ using EA;
 namespace Ser.Aws {
 
     class HelloAws {
+
+        private ObjectCache _cache = null;
+
+        public ObjectCache Cache {
+            get {
+                if (_cache == null) {
+                    _cache = MemoryCache.Default;
+                }
+                return _cache;
+            }
+        }
 
         public AwsLoginInformation awsLoginInformation { set; get; } = null;
 
@@ -63,22 +76,112 @@ namespace Ser.Aws {
         }
 
         public Element createVpcModel(Package pkg, Vpc vpc) {
-            Element element = pkg.Elements.AddNew(vpc.VpcId.ToString(), "Class");
+
+            // Get the model identifier
+            string vpcId = vpc.VpcId.ToString();
+
+            // Create the element
+            Element element = pkg.Elements.AddNew(vpcId, "Class");
             element.Update();
+
+            // Keep it in the cache
+            this.Cache[vpcId] = element;
+
             return element;
         }
 
-        public void createSubnetModel(Package pkg, Subnet subnet, Element vpcElement) {
+        public void createSubnetModel(Package pkg, Amazon.EC2.Model.Subnet subnet, Element vpcElement) {
+
+            // Get the model identifier
+            string snId = subnet.SubnetId.ToString();
 
             // Create Subnet element
-            Element subnetElement = pkg.Elements.AddNew(subnet.SubnetId.ToString(), "Class");
+            Element subnetElement = pkg.Elements.AddNew(snId, "Class");
             subnetElement.Update();
 
-            // Link it to the VPC element
-            Connector connector = vpcElement.Connectors.AddNew("has", "Aggregation");
-            connector.ClientID = subnetElement.ElementID;
-            connector.SupplierID = vpcElement.ElementID;
-            connector.Update();
+            //// Link it to the VPC element
+            //Connector connector = vpcElement.Connectors.AddNew("has", "Aggregation");
+            //connector.ClientID = subnetElement.ElementID;
+            //connector.SupplierID = vpcElement.ElementID;
+            //connector.Update();
+
+            // Keep it in the cache
+            this.Cache[snId] = subnetElement;
+        }
+
+        public Element createRouteTableModel(Package pkg, RouteTable rt) {
+
+            // Get the model identifier
+            string rtId = rt.RouteTableId.ToString();
+
+            // Create the Route Table element
+            Element element = pkg.Elements.AddNew(rtId, "Class");
+            element.Update();
+
+            // Keep it in the cache
+            this.Cache[rtId] = element;
+
+            return element;
+        }
+
+        public Element createInternetGatewayModel(Package pkg, InternetGateway igw) {
+
+            // Get the model identifier
+            string igwId = igw.InternetGatewayId.ToString();
+
+            // Create the Route Table element
+            Element element = pkg.Elements.AddNew(igwId, "Class");
+            element.Update();
+
+            // Keep it in the cache
+            this.Cache[igwId] = element;
+
+            return element;
+        }
+
+        public Element createSecurityGroupModel(Package pkg, SecurityGroup sg) {
+
+            // Get the model identifier
+            string sgId = sg.GroupId.ToString();
+
+            // Create the Route Table element
+            Element element = pkg.Elements.AddNew(sgId, "Class");
+            element.Update();
+
+            // Keep it in the cache
+            this.Cache[sgId] = element;
+
+            return element;
+        }
+
+        public Element createNetworkAclModel(Package pkg, NetworkAcl acl) {
+
+            // Get the model identifier
+            string aclId = acl.NetworkAclId.ToString();
+
+            // Create the Route Table element
+            Element element = pkg.Elements.AddNew(aclId, "Class");
+            element.Update();
+
+            // Keep it in the cache
+            this.Cache[aclId] = element;
+
+            return element;
+        }
+
+        public Element createDbInstanceModel(Package pkg, DBInstance dbi) {
+
+            // Get the model identifier
+            string dbiId = dbi.DbiResourceId.ToString();
+
+            // Create the Route Table element
+            Element element = pkg.Elements.AddNew(dbi.DbiResourceId.ToString(), "Class");
+            element.Update();
+
+            // Keep it in the cache
+            this.Cache[dbiId] = element;
+
+            return element;
         }
 
 
@@ -116,17 +219,53 @@ namespace Ser.Aws {
                         }
                     });
 
-                    List<Subnet> subnets = response.Subnets;
+                    List<Amazon.EC2.Model.Subnet> subnets = response.Subnets;
                     for (var jdx = 0; jdx < subnets.Count; jdx++) {
-                        Subnet subnet = subnets[idx];
+                        Amazon.EC2.Model.Subnet subnet = subnets[idx];
                         sr.WriteLine("SN: " + subnet.ToString());
                         this.createSubnetModel(pkg, subnet, vpcElement);
                     }
                 }
+
+                // Route tables
+                var routeTablesQueryRsp = this.awsLoginInformation.Ec2Client.DescribeRouteTables();
+                List<RouteTable> routeTables = routeTablesQueryRsp.RouteTables;
+                foreach (RouteTable rt in routeTables) {
+                    this.createRouteTableModel(pkg, rt);
+                }
+
+                // Internet Gateways
+                var igwQueryRsp = this.awsLoginInformation.Ec2Client.DescribeInternetGateways();
+                foreach (InternetGateway igw in igwQueryRsp.InternetGateways) {
+                    this.createInternetGatewayModel(pkg, igw);
+                }
+
+                // Security Groups
+                var sgQueryRsp = this.awsLoginInformation.Ec2Client.DescribeSecurityGroups();
+                foreach (SecurityGroup sg in sgQueryRsp.SecurityGroups) {
+                    this.createSecurityGroupModel(pkg, sg);
+                }
+
+                // Network ACLs
+                var aclQueryRsp = this.awsLoginInformation.Ec2Client.DescribeNetworkAcls();
+                foreach (NetworkAcl acl in aclQueryRsp.NetworkAcls) {
+                    this.createNetworkAclModel(pkg, acl);
+                }
+
+                
+
                 sr.WriteLine();
             }
             return sb.ToString();
 
+        }
+
+        public string GetRdsInfo(Package pkg) {
+            var dbInstancesQryRsp = this.awsLoginInformation.RdsClient.DescribeDBInstances();
+            foreach (DBInstance dbi in dbInstancesQryRsp.DBInstances) {
+                this.createDbInstanceModel(pkg, dbi);
+            }
+            return "nothing - not used anymore";
         }
 
         public string GetSimpleDBDomainInfo() {
@@ -203,12 +342,14 @@ namespace Ser.Aws {
 
         public string GetServiceOutput(Package pkg) {
 
-            string ec2Info = this.GetEc2Info();
             string vpcInfo = this.GetVpcInfo(pkg);
-            string simpleDBDomainInfo = this.GetSimpleDBDomainInfo();
-            string s3Info = this.GetS3Info();
+            string rdsInfo = this.GetRdsInfo(pkg);
 
-            return ec2Info + vpcInfo + simpleDBDomainInfo + s3Info;
+            //string ec2Info = this.GetEc2Info();
+            //string simpleDBDomainInfo = this.GetSimpleDBDomainInfo();
+            //string s3Info = this.GetS3Info();
+
+            return vpcInfo + rdsInfo;
         }
     }
 }
