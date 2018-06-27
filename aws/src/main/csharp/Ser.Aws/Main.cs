@@ -14,9 +14,12 @@ using System.Reflection;
 
 using Common.Logging;
 using Common.Logging.Configuration;
+using Common.Logging.Log4Net;
 
 using Spring.Context;
 using Spring.Context.Support;
+using System.Runtime.InteropServices;
+using log4net.Config;
 
 using EA;
 
@@ -24,14 +27,21 @@ using Ser.Aws;
 
 namespace Ser.Aws {
 
-	public class Main {
+    public class Main {
 
-		public string filecontents = "";
-		public bool readline = false;
-		public Form1 theForm;
-
+        Assembly _assembly = null;
         private IApplicationContext _context = null;
         private ILog _log = null;
+        private Form1 theForm;
+
+        public Assembly Assembly {
+            get {
+                if (_assembly == null) {
+                    _assembly = this.GetType().Assembly;
+                }
+                return _assembly;
+            }
+        }
 
         public IApplicationContext context {
             get {
@@ -45,19 +55,22 @@ namespace Ser.Aws {
         private ILog log {
             get {
                 if (this._log == null) {
-                    // create properties
-                    NameValueCollection properties = new NameValueCollection();
-                    properties["showDateTime"] = "true";
-
-                    // set Adapter
-                    //Common.Logging.LogManager.Adapter = new Common.Logging.Simple.ConsoleOutLoggerFactoryAdapter(properties);
-                    Common.Logging.LogManager.Adapter = new Common.Logging.Simple.TraceLoggerFactoryAdapter(properties);
-
                     this._log = LogManager.GetLogger(this.GetType());
-                    this._log.Debug("initialisation done");
                 }
                 return this._log;
             }
+        }
+
+        private void EnsureLog4NetIsConfigured() {
+
+            // Set Common.Logging adapter to use Log4Net
+            NameValueCollection properties = new NameValueCollection();
+            properties["configType"] = "EXTERNAL";
+            Common.Logging.LogManager.Adapter = new Common.Logging.Log4Net.Log4NetLoggerFactoryAdapter(properties);
+
+            // Configure Log4Net
+            Stream stream = this.Assembly.GetManifestResourceStream("Ser.Aws.log4net.xml");
+            global::log4net.Config.XmlConfigurator.Configure(stream);
         }
 
         //Called Before EA starts to check Add-In Exists
@@ -68,30 +81,20 @@ namespace Ser.Aws {
 
         public object EA_OnInitializeTechnologies(EA.Repository repository) {
             string technology = "";
-
-            Assembly assem = this.GetType().Assembly;
-
-            using (Stream stream = assem.GetManifestResourceStream("Ser.Aws.Ser.Aws.xml")) {
-
-                try {
-
-                    using (StreamReader reader = new StreamReader(stream)) {
-
-                        technology = reader.ReadToEnd();
-
-                    }
-
-                }
-
-                catch (Exception e) {
-
-                    System.Windows.Forms.MessageBox.Show("Error Initializing Technology - " + e.ToString());
-
-                }
-
+            Stream stream = this.Assembly.GetManifestResourceStream("Ser.Aws.Ser.Aws.xml");
+            try {
+                StreamReader reader = new StreamReader(stream);
+                technology = reader.ReadToEnd();
             }
-
+            catch (Exception e) {
+                System.Windows.Forms.MessageBox.Show("Error Initializing Technology - " + e.ToString());
+            }
             return technology;
+        }
+
+        public object EA_OnPostActivateTechnology(EA.Repository repository, EA.EventProperties info) {
+            this.EnsureLog4NetIsConfigured();
+            return false;
         }
 
         public object ProcessOperation(EA.Repository repository, object array) {
@@ -127,6 +130,7 @@ namespace Ser.Aws {
 					string[] ar = {
                         "Set Profile",
                         "Import",
+                        "Debug",
                         "About..."
                     };
 					return ar;
@@ -159,7 +163,8 @@ namespace Ser.Aws {
 
             // Menu items not dependent on whether a repository has been opened 
             if (ItemName == "Set Profile"
-            ||  ItemName == "About...") {
+            ||  ItemName == "About..."
+            ||  ItemName == "Debug") {
                 IsEnabled = true;
                 return;
             }
@@ -178,7 +183,6 @@ namespace Ser.Aws {
             switch (ItemName) {
 
                 case "Set Profile":
-                    this.log.Debug("Set Profile");
                     SetProfileForm form = (SetProfileForm) this.context.GetObject("SetProfileForm");
                     form.ShowDialog();
                     break;
@@ -204,6 +208,10 @@ namespace Ser.Aws {
 					Form1 anAbout = new Form1();
 					anAbout.ShowDialog();					
 					break;
+
+                case "Debug":
+                    this.log.Debug("hello jane 2");
+                    break;
 			}
 		}
 	}
