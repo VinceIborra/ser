@@ -83,30 +83,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\src\main\csharp\Ser.Aws\AwsLoginInformation.cs">
-      <Link>src\Ser.Aws\AwsLoginInformation.cs</Link>
+      <Link>source\AwsLoginInformation.cs</Link>
     </Compile>
     <Compile Include="..\..\..\src\main\csharp\Ser.Aws\AwsLoginInformationImpl.cs">
-      <Link>src\Ser.Aws\AwsLoginInformationImpl.cs</Link>
+      <Link>source\AwsLoginInformationImpl.cs</Link>
     </Compile>
     <Compile Include="..\..\..\src\main\csharp\Ser.Aws\HelloAws.cs">
-      <Link>src\Ser.Aws\HelloAws.cs</Link>
+      <Link>source\HelloAws.cs</Link>
     </Compile>
     <Compile Include="..\..\..\src\main\csharp\Ser.Custom.Log4Net.Adapters\EAAppender.cs">
-      <Link>src\Ser.Custom.Log4Net.Adapters\EAAppender.cs</Link>
+      <Link>source\EAAppender.cs</Link>
     </Compile>
     <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\Form1.cs">
-      <Link>src\Ser.Ea.Addin.Aws\Form1.cs</Link>
+      <Link>source\Form1.cs</Link>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\Main.cs">
-      <Link>src\Ser.Ea.Addin.Aws\Main.cs</Link>
+      <Link>source\Main.cs</Link>
     </Compile>
     <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\SetProfileForm.cs">
-      <Link>src\Ser.Ea.Addin.Aws\SetProfileForm.cs</Link>
+      <Link>source\SetProfileForm.cs</Link>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\SetProfileForm.designer.cs">
-      <Link>src\Ser.Ea.Addin.Aws\SetProfileForm.designer.cs</Link>
+      <Link>source\SetProfileForm.designer.cs</Link>
       <DependentUpon>SetProfileForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -122,22 +122,24 @@
     <Analyzer Include="..\packages\AWSSDK.SimpleDB.3.3.0.31\analyzers\dotnet\cs\AWSSDK.SimpleDB.CodeAnalysis.dll" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\Form1.resx">
+      <Link>source\Form1.resx</Link>
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\SetProfileForm.resx">
+      <Link>source\SetProfileForm.resx</Link>
+      <DependentUpon>SetProfileForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\context.xml">
       <Link>config\context.xml</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\Form1.resx">
-      <Link>src\Ser.Ea.Addin.Aws\Form1.resx</Link>
-      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\log4net.xml">
       <Link>config\log4net.xml</Link>
     </EmbeddedResource>
     <EmbeddedResource Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\Ser.Aws.xml">
       <Link>config\Ser.Aws.xml</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\SetProfileForm.resx">
-      <Link>src\Ser.Ea.Addin.Aws\SetProfileForm.resx</Link>
-      <DependentUpon>SetProfileForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
