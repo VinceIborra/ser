@@ -10,7 +10,9 @@ using System.Windows.Forms;
 
 using Amazon.Runtime.CredentialManagement;
 
-namespace Ser.Aws {
+using Ser.Aws;
+
+namespace Ser.Ea.Addin.Aws {
     public partial class SetProfileForm : Form {
 
         public AwsLoginInformation awsLoginInformation { set; get; } = null;

@@ -25,7 +25,7 @@ using EA;
 
 using Ser.Aws;
 
-namespace Ser.Aws {
+namespace Ser.Ea.Addin.Aws {
 
     public class Main {
 
@@ -46,7 +46,7 @@ namespace Ser.Aws {
         public IApplicationContext context {
             get {
                 if (this._context == null) {
-                    this._context = new XmlApplicationContext("assembly://Ser.Aws/Ser.Aws/config.context.xml");
+                    this._context = new XmlApplicationContext("assembly://Ser.Aws/Ser.Ea.Addin.Aws/config.context.xml");
                 }
                 return this._context;
             }
@@ -69,7 +69,7 @@ namespace Ser.Aws {
             Common.Logging.LogManager.Adapter = new Common.Logging.Log4Net.Log4NetLoggerFactoryAdapter(properties);
 
             // Configure Log4Net
-            Stream stream = this.Assembly.GetManifestResourceStream("Ser.Aws.config.log4net.xml");
+            Stream stream = this.Assembly.GetManifestResourceStream("Ser.Ea.Addin.Aws.config.log4net.xml");
             global::log4net.Config.XmlConfigurator.Configure(stream);
         }
 
@@ -81,7 +81,7 @@ namespace Ser.Aws {
 
         public object EA_OnInitializeTechnologies(EA.Repository repository) {
             string technology = "";
-            Stream stream = this.Assembly.GetManifestResourceStream("Ser.Aws.config.Ser.Aws.xml");
+            Stream stream = this.Assembly.GetManifestResourceStream("Ser.Ea.Addin.Aws.config.Ser.Aws.xml");
             try {
                 StreamReader reader = new StreamReader(stream);
                 technology = reader.ReadToEnd();
