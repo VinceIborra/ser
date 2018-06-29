@@ -7,7 +7,7 @@
     <ProjectGuid>{D56F40A7-F564-437C-B22F-637E22E4F7C3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ser.Aws</RootNamespace>
+    <RootNamespace>Ser.Ea.Addin.Aws</RootNamespace>
     <AssemblyName>Ser.Aws</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -140,5 +140,6 @@
       <DependentUpon>SetProfileForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

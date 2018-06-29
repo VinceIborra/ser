@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using System.Data;
 
-namespace Ser.Aws
+namespace Ser.Ea.Addin.Aws
 {
 	/// <summary>
 	/// Summary description for Form1.

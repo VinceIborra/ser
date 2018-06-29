@@ -8,7 +8,7 @@
 		</layout>
 	</appender>
 
-	<appender name="EAAppender" type="Ser.log4net.Appender.EAAppender">
+	<appender name="EAAppender" type="Ser.Custom.Log4Net.Appenders.EAAppender">
 
 		<OutputTabName value="Ser.Aws.Log" />
 

@@ -3,7 +3,7 @@
 	
 	<object id="AwsLoginInformationObj" type="Ser.Aws.AwsLoginInformationImpl, Ser.Aws"/>
 
-	<object id="SetProfileForm" type="Ser.Aws.SetProfileForm, Ser.Aws">
+	<object id="SetProfileForm" type="Ser.Ea.Addin.Aws.SetProfileForm, Ser.Aws">
 		<property name="awsLoginInformation" ref="AwsLoginInformationObj"/>
 	</object>
 	
