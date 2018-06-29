@@ -5,7 +5,7 @@ using log4net.Appender;
 
 using EA;
 
-namespace Ser.log4net.Appender {
+namespace Ser.Custom.Log4Net.Appenders {
 
     public class EAAppender : AppenderSkeleton {
 

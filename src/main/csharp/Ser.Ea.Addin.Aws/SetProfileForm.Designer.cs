@@ -1,4 +1,4 @@
-﻿namespace Ser.Aws {
+﻿namespace Ser.Ea.Addin.Aws {
     partial class SetProfileForm {
         /// <summary>
         /// Required designer variable.
