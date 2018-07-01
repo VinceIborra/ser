@@ -94,8 +94,8 @@
     <Compile Include="..\..\..\src\main\csharp\Ser.Custom.Log4Net.Adapters\EAAppender.cs">
       <Link>src\Ser.Custom.Log4Net.Adapters\EAAppender.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\Form1.cs">
-      <Link>src\Ser.Ea.Addin.Aws\Form1.cs</Link>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\AboutForm.cs">
+      <Link>src\Ser.Ea.Addin.Aws\AboutForm.cs</Link>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\Main.cs">
@@ -122,12 +122,12 @@
     <Analyzer Include="..\packages\AWSSDK.SimpleDB.3.3.0.31\analyzers\dotnet\cs\AWSSDK.SimpleDB.CodeAnalysis.dll" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\AboutForm.resx">
+      <Link>src\Ser.Ea.Addin.Aws\AboutForm.resx</Link>
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\context.xml">
       <Link>config\context.xml</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\Form1.resx">
-      <Link>src\Ser.Ea.Addin.Aws\Form1.resx</Link>
-      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\log4net.xml">
       <Link>config\log4net.xml</Link>

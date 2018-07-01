@@ -6,7 +6,9 @@
 	<object id="SetProfileForm" type="Ser.Ea.Addin.Aws.SetProfileForm, Ser.Aws">
 		<property name="awsLoginInformation" ref="AwsLoginInformationObj"/>
 	</object>
-	
+
+	<object id="AboutForm" type="Ser.Ea.Addin.Aws.AboutForm, Ser.Aws"/>
+
 	<object id="HelloAws" type="Ser.Aws.HelloAws, Ser.Aws">
 		<property name="awsLoginInformation" ref="AwsLoginInformationObj"/>
 	</object>
