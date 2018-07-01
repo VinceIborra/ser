@@ -10,7 +10,7 @@ namespace Ser.Ea.Addin.Aws
 	/// <summary>
 	/// Summary description for Form1.
 	/// </summary>
-	public class Form1 : System.Windows.Forms.Form
+	public class AboutForm : System.Windows.Forms.Form
 	{
 		private System.Windows.Forms.LinkLabel linkLabel1;
 		private System.Windows.Forms.LinkLabel linkLabel2;
@@ -21,7 +21,7 @@ namespace Ser.Ea.Addin.Aws
 		/// </summary>
 		private System.ComponentModel.Container components = null;
 
-		public Form1()
+		public AboutForm()
 		{
 			//
 			// Required for Windows Form Designer support
@@ -97,7 +97,6 @@ namespace Ser.Ea.Addin.Aws
             this.label1.Size = new System.Drawing.Size(224, 96);
             this.label1.TabIndex = 1;
             this.label1.Text = "Ser.Aws Plugin";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // Form1
             // 
@@ -106,7 +105,7 @@ namespace Ser.Ea.Addin.Aws
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.linkLabel1);
-            this.Name = "Form1";
+            this.Name = "AboutForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "About";
             this.groupBox1.ResumeLayout(false);
@@ -115,17 +114,13 @@ namespace Ser.Ea.Addin.Aws
 		}
 		#endregion
 
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
-		[STAThread]
-		static void Main() 
-		{
-			Application.Run(new Form1());
-		}
-
-        private void label1_Click(object sender, EventArgs e) {
-
-        }
+		///// <summary>
+		///// The main entry point for the application.
+		///// </summary>
+		//[STAThread]
+		//static void Main() 
+		//{
+		//	Application.Run(new Form1());
+		//}
     }
 }

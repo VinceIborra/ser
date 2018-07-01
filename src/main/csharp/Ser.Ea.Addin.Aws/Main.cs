@@ -32,7 +32,6 @@ namespace Ser.Ea.Addin.Aws {
         Assembly _assembly = null;
         private IApplicationContext _context = null;
         private ILog _log = null;
-        private Form1 theForm;
 
         public Assembly Assembly {
             get {
@@ -183,8 +182,8 @@ namespace Ser.Ea.Addin.Aws {
             switch (ItemName) {
 
                 case "Set Profile":
-                    SetProfileForm form = (SetProfileForm) this.context.GetObject("SetProfileForm");
-                    form.ShowDialog();
+                    SetProfileForm setProfileForm = (SetProfileForm) this.context.GetObject("SetProfileForm");
+                    setProfileForm.ShowDialog();
                     break;
 
                 case "Import":
@@ -205,8 +204,8 @@ namespace Ser.Ea.Addin.Aws {
                     break;
 
 				case "About...":
-					Form1 anAbout = new Form1();
-					anAbout.ShowDialog();					
+                    AboutForm aboutForm = (AboutForm)this.context.GetObject("AboutForm");
+                    aboutForm.ShowDialog();
 					break;
 
                 case "Debug":
