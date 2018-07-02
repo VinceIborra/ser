@@ -82,14 +82,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\src\main\csharp\Ser.Aws\AwsLoginInformation.cs">
-      <Link>src\Ser.Aws\AwsLoginInformation.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\src\main\csharp\Ser.Aws\AwsLoginInformationImpl.cs">
-      <Link>src\Ser.Aws\AwsLoginInformationImpl.cs</Link>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Aws\AwsClient.cs">
+      <Link>src\Ser.Aws\AwsClient.cs</Link>
     </Compile>
     <Compile Include="..\..\..\src\main\csharp\Ser.Aws\HelloAws.cs">
       <Link>src\Ser.Aws\HelloAws.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Aws\IAwsClient.cs">
+      <Link>src\Ser.Aws\IAwsClient.cs</Link>
     </Compile>
     <Compile Include="..\..\..\src\main\csharp\Ser.Custom.Log4Net.Adapters\EAAppender.cs">
       <Link>src\Ser.Custom.Log4Net.Adapters\EAAppender.cs</Link>

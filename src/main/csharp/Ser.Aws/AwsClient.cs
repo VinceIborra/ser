@@ -5,7 +5,7 @@ using Amazon.EC2;
 using Amazon.RDS;
 
 namespace Ser.Aws {
-    public class AwsLoginInformationImpl : AwsLoginInformation {
+    public class AwsClient : IAwsClient {
 
         private CredentialProfile _credentialProfile = null;
         private AWSCredentials _awsCredentials = null;
