@@ -3,9 +3,8 @@ using Amazon.Runtime.CredentialManagement;
 using Amazon.EC2;
 using Amazon.RDS;
 
-
 namespace Ser.Aws {
-    public interface AwsLoginInformation {
+    public interface IAwsClient {
         CredentialProfile credentialProfile { get; set; }
         AWSCredentials AwsCredentials { get; }
         IAmazonEC2 Ec2Client { get; }

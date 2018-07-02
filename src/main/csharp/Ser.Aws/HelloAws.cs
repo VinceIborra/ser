@@ -35,7 +35,7 @@ namespace Ser.Aws {
             }
         }
 
-        public AwsLoginInformation awsLoginInformation { set; get; } = null;
+        public IAwsClient AwsClient { set; get; } = null;
 
         private string GetEc2Info() {
 
@@ -50,7 +50,7 @@ namespace Ser.Aws {
                 DescribeInstancesRequest ec2Request = new DescribeInstancesRequest();
 
                 try {
-                    DescribeInstancesResponse ec2Response = this.awsLoginInformation.Ec2Client.DescribeInstances(ec2Request);
+                    DescribeInstancesResponse ec2Response = this.AwsClient.Ec2Client.DescribeInstances(ec2Request);
                     int numInstances = 0;
                     numInstances = ec2Response.Reservations.Count;
                     sr.WriteLine(string.Format("You have {0} Amazon EC2 instance(s) running in the {1} region.",
@@ -191,7 +191,7 @@ namespace Ser.Aws {
         public string GetVpcInfo(Package pkg) {
             StringBuilder sb = new StringBuilder(1024);
             using (StringWriter sr = new StringWriter(sb)) {
-                var vpcresponse = this.awsLoginInformation.Ec2Client.DescribeVpcs();
+                var vpcresponse = this.AwsClient.Ec2Client.DescribeVpcs();
 
                 List<Vpc> vpcs = vpcresponse.Vpcs;
                 for (var idx = 0; idx < vpcs.Count; idx++) {
@@ -208,7 +208,7 @@ namespace Ser.Aws {
                     }
 
                     // Subnets
-                    var response = this.awsLoginInformation.Ec2Client.DescribeSubnets(new DescribeSubnetsRequest {
+                    var response = this.AwsClient.Ec2Client.DescribeSubnets(new DescribeSubnetsRequest {
                         Filters = new List<Amazon.EC2.Model.Filter> {
                             new Amazon.EC2.Model.Filter  {
                                 Name = "vpc-id",
@@ -228,26 +228,26 @@ namespace Ser.Aws {
                 }
 
                 // Route tables
-                var routeTablesQueryRsp = this.awsLoginInformation.Ec2Client.DescribeRouteTables();
+                var routeTablesQueryRsp = this.AwsClient.Ec2Client.DescribeRouteTables();
                 List<RouteTable> routeTables = routeTablesQueryRsp.RouteTables;
                 foreach (RouteTable rt in routeTables) {
                     this.createRouteTableModel(pkg, rt);
                 }
 
                 // Internet Gateways
-                var igwQueryRsp = this.awsLoginInformation.Ec2Client.DescribeInternetGateways();
+                var igwQueryRsp = this.AwsClient.Ec2Client.DescribeInternetGateways();
                 foreach (InternetGateway igw in igwQueryRsp.InternetGateways) {
                     this.createInternetGatewayModel(pkg, igw);
                 }
 
                 // Security Groups
-                var sgQueryRsp = this.awsLoginInformation.Ec2Client.DescribeSecurityGroups();
+                var sgQueryRsp = this.AwsClient.Ec2Client.DescribeSecurityGroups();
                 foreach (SecurityGroup sg in sgQueryRsp.SecurityGroups) {
                     this.createSecurityGroupModel(pkg, sg);
                 }
 
                 // Network ACLs
-                var aclQueryRsp = this.awsLoginInformation.Ec2Client.DescribeNetworkAcls();
+                var aclQueryRsp = this.AwsClient.Ec2Client.DescribeNetworkAcls();
                 foreach (NetworkAcl acl in aclQueryRsp.NetworkAcls) {
                     this.createNetworkAclModel(pkg, acl);
                 }
@@ -261,7 +261,7 @@ namespace Ser.Aws {
         }
 
         public string GetRdsInfo(Package pkg) {
-            var dbInstancesQryRsp = this.awsLoginInformation.RdsClient.DescribeDBInstances();
+            var dbInstancesQryRsp = this.AwsClient.RdsClient.DescribeDBInstances();
             foreach (DBInstance dbi in dbInstancesQryRsp.DBInstances) {
                 this.createDbInstanceModel(pkg, dbi);
             }
@@ -274,7 +274,7 @@ namespace Ser.Aws {
 
                 // Print the number of Amazon SimpleDB domains.
                 //IAmazonSimpleDB sdb = new AmazonSimpleDBClient();
-                IAmazonSimpleDB sdb = new AmazonSimpleDBClient(this.awsLoginInformation.AwsCredentials, RegionEndpoint.APSoutheast2);
+                IAmazonSimpleDB sdb = new AmazonSimpleDBClient(this.AwsClient.AwsCredentials, RegionEndpoint.APSoutheast2);
                 ListDomainsRequest sdbRequest = new ListDomainsRequest();
 
                 try {
@@ -311,7 +311,7 @@ namespace Ser.Aws {
 
                 // Print the number of Amazon S3 Buckets.
                 //IAmazonS3 s3Client = new AmazonS3Client();
-                IAmazonS3 s3Client = new AmazonS3Client(this.awsLoginInformation.AwsCredentials, RegionEndpoint.APSoutheast2);
+                IAmazonS3 s3Client = new AmazonS3Client(this.AwsClient.AwsCredentials, RegionEndpoint.APSoutheast2);
 
                 try {
                     ListBucketsResponse response = s3Client.ListBuckets();

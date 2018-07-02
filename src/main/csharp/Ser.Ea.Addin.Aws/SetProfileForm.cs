@@ -15,7 +15,7 @@ using Ser.Aws;
 namespace Ser.Ea.Addin.Aws {
     public partial class SetProfileForm : Form {
 
-        public AwsLoginInformation awsLoginInformation { set; get; } = null;
+        public IAwsClient AwsClient { set; get; } = null;
 
         private List<CredentialProfile> _credentialProfileList = null;
 
@@ -91,7 +91,7 @@ namespace Ser.Ea.Addin.Aws {
 
             // Set selected profile if ok
             if (this.DialogResult.Equals(DialogResult.OK)) {
-                this.awsLoginInformation.credentialProfile = this.chosenProfile;
+                this.AwsClient.credentialProfile = this.chosenProfile;
             }
         }
 
