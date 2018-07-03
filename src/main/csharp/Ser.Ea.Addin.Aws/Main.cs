@@ -195,11 +195,8 @@ namespace Ser.Ea.Addin.Aws {
                         pkg = Repository.GetTreeSelectedPackage();
 
                         // Query AWS
-                        HelloAws aws = (HelloAws)this.context.GetObject("HelloAws");
-                        string notes = aws.GetServiceOutput(pkg);
-
-                        // Debug
-                        //MessageBox.Show(notes);
+                        IAwsImporter awsImporter = (IAwsImporter) this.context.GetObject("AwsImporterObj");
+                        awsImporter.Import(pkg);
                     }
                     break;
 

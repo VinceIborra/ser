@@ -22,7 +22,7 @@ using EA;
 
 namespace Ser.Aws {
 
-    class HelloAws {
+    class AwsImporter : IAwsImporter {
 
         private ObjectCache _cache = null;
 
@@ -75,7 +75,7 @@ namespace Ser.Aws {
             return sb.ToString();
         }
 
-        public Element createVpcModel(Package pkg, Vpc vpc) {
+        private Element createVpcModel(Package pkg, Vpc vpc) {
 
             // Get the model identifier
             string vpcId = vpc.VpcId.ToString();
@@ -90,7 +90,7 @@ namespace Ser.Aws {
             return element;
         }
 
-        public void createSubnetModel(Package pkg, Amazon.EC2.Model.Subnet subnet, Element vpcElement) {
+        private void createSubnetModel(Package pkg, Amazon.EC2.Model.Subnet subnet, Element vpcElement) {
 
             // Get the model identifier
             string snId = subnet.SubnetId.ToString();
@@ -109,7 +109,7 @@ namespace Ser.Aws {
             this.Cache[snId] = subnetElement;
         }
 
-        public Element createRouteTableModel(Package pkg, RouteTable rt) {
+        private Element createRouteTableModel(Package pkg, RouteTable rt) {
 
             // Get the model identifier
             string rtId = rt.RouteTableId.ToString();
@@ -124,7 +124,7 @@ namespace Ser.Aws {
             return element;
         }
 
-        public Element createInternetGatewayModel(Package pkg, InternetGateway igw) {
+        private Element createInternetGatewayModel(Package pkg, InternetGateway igw) {
 
             // Get the model identifier
             string igwId = igw.InternetGatewayId.ToString();
@@ -139,7 +139,7 @@ namespace Ser.Aws {
             return element;
         }
 
-        public Element createSecurityGroupModel(Package pkg, SecurityGroup sg) {
+        private Element createSecurityGroupModel(Package pkg, SecurityGroup sg) {
 
             // Get the model identifier
             string sgId = sg.GroupId.ToString();
@@ -154,7 +154,7 @@ namespace Ser.Aws {
             return element;
         }
 
-        public Element createNetworkAclModel(Package pkg, NetworkAcl acl) {
+        private Element createNetworkAclModel(Package pkg, NetworkAcl acl) {
 
             // Get the model identifier
             string aclId = acl.NetworkAclId.ToString();
@@ -169,7 +169,7 @@ namespace Ser.Aws {
             return element;
         }
 
-        public Element createDbInstanceModel(Package pkg, DBInstance dbi) {
+        private Element createDbInstanceModel(Package pkg, DBInstance dbi) {
 
             // Get the model identifier
             string dbiId = dbi.DbiResourceId.ToString();
@@ -188,7 +188,7 @@ namespace Ser.Aws {
         //
         //
         //
-        public string GetVpcInfo(Package pkg) {
+        private string GetVpcInfo(Package pkg) {
             StringBuilder sb = new StringBuilder(1024);
             using (StringWriter sr = new StringWriter(sb)) {
                 var vpcresponse = this.AwsClient.Ec2Client.DescribeVpcs();
@@ -260,7 +260,7 @@ namespace Ser.Aws {
 
         }
 
-        public string GetRdsInfo(Package pkg) {
+        private string GetRdsInfo(Package pkg) {
             var dbInstancesQryRsp = this.AwsClient.RdsClient.DescribeDBInstances();
             foreach (DBInstance dbi in dbInstancesQryRsp.DBInstances) {
                 this.createDbInstanceModel(pkg, dbi);
@@ -268,7 +268,7 @@ namespace Ser.Aws {
             return "nothing - not used anymore";
         }
 
-        public string GetSimpleDBDomainInfo() {
+        private string GetSimpleDBDomainInfo() {
             StringBuilder sb = new StringBuilder(1024);
             using (StringWriter sr = new StringWriter(sb)) {
 
@@ -340,7 +340,7 @@ namespace Ser.Aws {
             return sb.ToString();
         }
 
-        public string GetServiceOutput(Package pkg) {
+        public void Import(Package pkg) {
 
             string vpcInfo = this.GetVpcInfo(pkg);
             string rdsInfo = this.GetRdsInfo(pkg);
@@ -348,8 +348,6 @@ namespace Ser.Aws {
             //string ec2Info = this.GetEc2Info();
             //string simpleDBDomainInfo = this.GetSimpleDBDomainInfo();
             //string s3Info = this.GetS3Info();
-
-            return vpcInfo + rdsInfo;
         }
     }
 }

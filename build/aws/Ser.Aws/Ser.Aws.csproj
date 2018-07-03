@@ -85,11 +85,14 @@
     <Compile Include="..\..\..\src\main\csharp\Ser.Aws\AwsClient.cs">
       <Link>src\Ser.Aws\AwsClient.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\src\main\csharp\Ser.Aws\HelloAws.cs">
-      <Link>src\Ser.Aws\HelloAws.cs</Link>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Aws\AwsImporter.cs">
+      <Link>src\Ser.Aws\AwsImporter.cs</Link>
     </Compile>
     <Compile Include="..\..\..\src\main\csharp\Ser.Aws\IAwsClient.cs">
       <Link>src\Ser.Aws\IAwsClient.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Aws\IAwsImporter.cs">
+      <Link>src\Ser.Aws\IAwsImporter.cs</Link>
     </Compile>
     <Compile Include="..\..\..\src\main\csharp\Ser.Custom.Log4Net.Adapters\EAAppender.cs">
       <Link>src\Ser.Custom.Log4Net.Adapters\EAAppender.cs</Link>
@@ -128,6 +131,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\context.xml">
       <Link>config\context.xml</Link>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\log4net.xml">
       <Link>config\log4net.xml</Link>
