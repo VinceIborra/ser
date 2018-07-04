@@ -9,8 +9,12 @@
 
 	<object id="AboutForm" type="Ser.Ea.Addin.Aws.AboutForm, Ser.Aws"/>
 
-	<object id="AwsImporterObj" type="Ser.Aws.AwsImporter, Ser.Aws">
+	<object id="AwsRepositoryObj" type="Ser.Aws.AwsRepository, Ser.Aws">
 		<property name="AwsClient" ref="AwsClientObj"/>
+	</object>
+
+	<object id="AwsImporterObj" type="Ser.Aws.AwsImporter, Ser.Aws">
+		<property name="AwsRepository" ref="AwsRepositoryObj"/>
 	</object>
 	
 </objects>

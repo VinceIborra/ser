@@ -88,11 +88,17 @@
     <Compile Include="..\..\..\src\main\csharp\Ser.Aws\AwsImporter.cs">
       <Link>src\Ser.Aws\AwsImporter.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Aws\AwsRepository.cs">
+      <Link>src\Ser.Aws\AwsRepository.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\src\main\csharp\Ser.Aws\IAwsClient.cs">
       <Link>src\Ser.Aws\IAwsClient.cs</Link>
     </Compile>
     <Compile Include="..\..\..\src\main\csharp\Ser.Aws\IAwsImporter.cs">
       <Link>src\Ser.Aws\IAwsImporter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Aws\IAwsRepository.cs">
+      <Link>src\Ser.Aws\IAwsRepository.cs</Link>
     </Compile>
     <Compile Include="..\..\..\src\main\csharp\Ser.Custom.Log4Net.Adapters\EAAppender.cs">
       <Link>src\Ser.Custom.Log4Net.Adapters\EAAppender.cs</Link>
