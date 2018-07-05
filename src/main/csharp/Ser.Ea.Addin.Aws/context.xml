@@ -13,8 +13,11 @@
 		<property name="AwsClient" ref="AwsClientObj"/>
 	</object>
 
+	<object id="AwsModellerObj" type="Ser.Ea.Addin.Aws.AwsModeller, Ser.Aws"/>
+
 	<object id="AwsImporterObj" type="Ser.Aws.AwsImporter, Ser.Aws">
 		<property name="AwsRepository" ref="AwsRepositoryObj"/>
+		<property name="AwsModeller" ref="AwsModellerObj"/>
 	</object>
 	
 </objects>

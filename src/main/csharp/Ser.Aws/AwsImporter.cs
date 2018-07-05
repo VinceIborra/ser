@@ -20,6 +20,8 @@ using Amazon.Runtime.CredentialManagement;
 
 using EA;
 
+using Ser.Ea.Addin.Aws;
+
 namespace Ser.Aws {
 
     class AwsImporter : IAwsImporter {
@@ -36,6 +38,8 @@ namespace Ser.Aws {
         }
 
         public IAwsRepository AwsRepository { set; get; } = null;
+
+        public IAwsModeller AwsModeller { set; get; } = null;
 
         //private string GetEc2Info() {
 
@@ -75,184 +79,51 @@ namespace Ser.Aws {
         //    return sb.ToString();
         //}
 
-        private Element createVpcModel(Package pkg, Vpc vpc) {
-
-            // Get the model identifier
-            string vpcId = vpc.VpcId.ToString();
-
-            // Create the element
-            Element element = pkg.Elements.AddNew(vpcId, "Class");
-            element.Update();
-
-            // Keep it in the cache
-            this.Cache[vpcId] = element;
-
-            //List<Amazon.EC2.Model.Tag> tags = vpc.Tags;
-            //for (var jdx = 0; jdx < tags.Count; jdx++) {
-            //    Amazon.EC2.Model.Tag tag = tags[jdx];
-            //    sr.WriteLine("Key: " + tag.Key + ", Value: " + tag.Value);
-            //}
-
-            return element;
-        }
-
-        private void createSubnetModel(Package pkg, Amazon.EC2.Model.Subnet subnet) {
-
-            // Get the model identifier
-            string snId = subnet.SubnetId.ToString();
-
-            // Create Subnet element
-            Element subnetElement = pkg.Elements.AddNew(snId, "Class");
-            subnetElement.Update();
-
-            // Keep it in the cache
-            this.Cache[snId] = subnetElement;
-        }
-
-        private void createSubnetModel(Package pkg, Amazon.EC2.Model.Subnet subnet, Element vpcElement) {
-
-            // Get the model identifier
-            string snId = subnet.SubnetId.ToString();
-
-            // Create Subnet element
-            Element subnetElement = pkg.Elements.AddNew(snId, "Class");
-            subnetElement.Update();
-
-            //// Link it to the VPC element
-            //Connector connector = vpcElement.Connectors.AddNew("has", "Aggregation");
-            //connector.ClientID = subnetElement.ElementID;
-            //connector.SupplierID = vpcElement.ElementID;
-            //connector.Update();
-
-            // Keep it in the cache
-            this.Cache[snId] = subnetElement;
-        }
-
-        private Element createRouteTableModel(Package pkg, RouteTable rt) {
-
-            // Get the model identifier
-            string rtId = rt.RouteTableId.ToString();
-
-            // Create the Route Table element
-            Element element = pkg.Elements.AddNew(rtId, "Class");
-            element.Update();
-
-            // Keep it in the cache
-            this.Cache[rtId] = element;
-
-            return element;
-        }
-
-        private Element createInternetGatewayModel(Package pkg, InternetGateway igw) {
-
-            // Get the model identifier
-            string igwId = igw.InternetGatewayId.ToString();
-
-            // Create the Route Table element
-            Element element = pkg.Elements.AddNew(igwId, "Class");
-            element.Update();
-
-            // Keep it in the cache
-            this.Cache[igwId] = element;
-
-            return element;
-        }
-
-        private Element createSecurityGroupModel(Package pkg, SecurityGroup sg) {
-
-            // Get the model identifier
-            string sgId = sg.GroupId.ToString();
-
-            // Create the Route Table element
-            Element element = pkg.Elements.AddNew(sgId, "Class");
-            element.Update();
-
-            // Keep it in the cache
-            this.Cache[sgId] = element;
-
-            return element;
-        }
-
-        private Element createNetworkAclModel(Package pkg, NetworkAcl acl) {
-
-            // Get the model identifier
-            string aclId = acl.NetworkAclId.ToString();
-
-            // Create the Route Table element
-            Element element = pkg.Elements.AddNew(aclId, "Class");
-            element.Update();
-
-            // Keep it in the cache
-            this.Cache[aclId] = element;
-
-            return element;
-        }
-
-        private Element createDbInstanceModel(Package pkg, DBInstance dbi) {
-
-            // Get the model identifier
-            string dbiId = dbi.DbiResourceId.ToString();
-
-            // Create the Route Table element
-            Element element = pkg.Elements.AddNew(dbi.DbiResourceId.ToString(), "Class");
-            element.Update();
-
-            // Keep it in the cache
-            this.Cache[dbiId] = element;
-
-            return element;
-        }
-
-
-        //
-        //
-        //
         private void ImportVpcElements(Package pkg) {
 
             // VPCs
             IList<Vpc> vpcs = this.AwsRepository.FindVpcAll();
             foreach (Vpc vpc in vpcs) {
-                Element vpcElement = this.createVpcModel(pkg, vpc);
+                this.AwsModeller.createModel(pkg, vpc);
             }
 
             // Subnets
             IList<Amazon.EC2.Model.Subnet> subnets = this.AwsRepository.FindSubnetAll();
             foreach (Amazon.EC2.Model.Subnet subnet in subnets) {
-                this.createSubnetModel(pkg, subnet);
+                this.AwsModeller.createModel(pkg, subnet);
             }
 
             // Route tables
             IList<RouteTable> routeTables = this.AwsRepository.FindRouteTablesAll();
             foreach (RouteTable routeTable in routeTables) {
-                this.createRouteTableModel(pkg, routeTable);
+                this.AwsModeller.createModel(pkg, routeTable);
             }
 
             // Internet Gateways
             IList<InternetGateway> internetGateways = this.AwsRepository.FindInternetGatewaysAll();
             foreach (InternetGateway internetGateway in internetGateways) {
-                this.createInternetGatewayModel(pkg, internetGateway);
+                this.AwsModeller.createModel(pkg, internetGateway);
             }
 
             // Security Groups
             IList<SecurityGroup> securityGroups = this.AwsRepository.FindSecurityGroupsAll();
             foreach (SecurityGroup securityGroup in securityGroups) {
-                this.createSecurityGroupModel(pkg, securityGroup);
+                this.AwsModeller.createModel(pkg, securityGroup);
             }
 
             // Network ACLs
             IList<NetworkAcl> networkAcls = this.AwsRepository.FindNetworkAclsAll();
             foreach (NetworkAcl networkAcl in networkAcls) {
-                this.createNetworkAclModel(pkg, networkAcl);
+                this.AwsModeller.createModel(pkg, networkAcl);
             }
         }
 
-        //private string GetRdsInfo(Package pkg) {
-        //    var dbInstancesQryRsp = this.AwsClient.RdsClient.DescribeDBInstances();
-        //    foreach (DBInstance dbi in dbInstancesQryRsp.DBInstances) {
-        //        this.createDbInstanceModel(pkg, dbi);
-        //    }
-        //    return "nothing - not used anymore";
-        //}
+        private void ImportRdsElements(Package pkg) {
+            IList<DBInstance> DbInstances = this.AwsRepository.FindDbInstancesAll();
+            foreach (DBInstance dbInstance in DbInstances) {
+                this.AwsModeller.createModel(pkg, dbInstance);
+            }
+        }
 
         //private string GetSimpleDBDomainInfo() {
         //    StringBuilder sb = new StringBuilder(1024);
@@ -327,9 +198,8 @@ namespace Ser.Aws {
         //}
 
         public void Import(Package pkg) {
-
             this.ImportVpcElements(pkg);
-            //string rdsInfo = this.GetRdsInfo(pkg);
+            this.ImportRdsElements(pkg);
 
             //string ec2Info = this.GetEc2Info();
             //string simpleDBDomainInfo = this.GetSimpleDBDomainInfo();

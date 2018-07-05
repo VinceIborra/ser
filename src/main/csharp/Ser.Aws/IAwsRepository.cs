@@ -18,6 +18,7 @@ using Amazon.Runtime.CredentialManagement;
 
 namespace Ser.Aws {
     public interface IAwsRepository {
+
         IList<Vpc> FindVpcAll();
         IList<Amazon.EC2.Model.Subnet> FindSubnetAll();
         IList<RouteTable> FindRouteTablesAll();
@@ -26,5 +27,7 @@ namespace Ser.Aws {
         IList<NetworkAcl> FindNetworkAclsAll();
 
         IList<Amazon.EC2.Model.Subnet> FindSubnetsForVpc(string vpcId);
+
+        IList<DBInstance> FindDbInstancesAll();
     }
 }

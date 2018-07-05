@@ -65,5 +65,10 @@ namespace Ser.Aws {
 
             return response.Subnets;
         }
+
+        public IList<DBInstance> FindDbInstancesAll() {
+            var dbInstancesQryRsp = this.AwsClient.RdsClient.DescribeDBInstances();
+            return dbInstancesQryRsp.DBInstances;
+        }
     }
 }
