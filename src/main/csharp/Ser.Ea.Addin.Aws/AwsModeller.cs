@@ -11,6 +11,8 @@ using EA;
 namespace Ser.Ea.Addin.Aws {
     class AwsModeller : IAwsModeller {
 
+        public IAwsModelCache AwsModelCache { set; get; } = null;
+
         public void createModel(Package pkg, Vpc vpc) {
 
             // Get the model identifier
@@ -21,7 +23,7 @@ namespace Ser.Ea.Addin.Aws {
             element.Update();
 
             // Keep it in the cache
-            //this.Cache[vpcId] = element;
+            this.AwsModelCache.Add(vpcId, element);
 
             //List<Amazon.EC2.Model.Tag> tags = vpc.Tags;
             //for (var jdx = 0; jdx < tags.Count; jdx++) {
@@ -42,7 +44,7 @@ namespace Ser.Ea.Addin.Aws {
             subnetElement.Update();
 
             // Keep it in the cache
-            //this.Cache[snId] = subnetElement;
+            this.AwsModelCache.Add(snId, subnetElement);
         }
 
         //void createSubnetModel(Package pkg, Amazon.EC2.Model.Subnet subnet, Element vpcElement) {
@@ -74,9 +76,7 @@ namespace Ser.Ea.Addin.Aws {
             element.Update();
 
             // Keep it in the cache
-            //this.Cache[rtId] = element;
-
-            //return element;
+            this.AwsModelCache.Add(rtId, element);
         }
 
         public void createModel(Package pkg, InternetGateway igw) {
@@ -89,9 +89,7 @@ namespace Ser.Ea.Addin.Aws {
             element.Update();
 
             // Keep it in the cache
-            //this.Cache[igwId] = element;
-
-            //return element;
+            this.AwsModelCache.Add(igwId, element);
         }
 
         public void createModel(Package pkg, SecurityGroup sg) {
@@ -104,9 +102,7 @@ namespace Ser.Ea.Addin.Aws {
             element.Update();
 
             // Keep it in the cache
-            //this.Cache[sgId] = element;
-
-            //return element;
+            this.AwsModelCache.Add(sgId, element);
         }
 
         public void createModel(Package pkg, NetworkAcl acl) {
@@ -119,11 +115,8 @@ namespace Ser.Ea.Addin.Aws {
             element.Update();
 
             // Keep it in the cache
-            //this.Cache[aclId] = element;
-
-            //return element;
+            this.AwsModelCache.Add(aclId, element);
         }
-
 
         public void createModel(Package pkg, DBInstance dbi) {
 
@@ -135,9 +128,7 @@ namespace Ser.Ea.Addin.Aws {
             element.Update();
 
             // Keep it in the cache
-            //this.Cache[dbiId] = element;
-
-            //return element;
+            this.AwsModelCache.Add(dbiId, element);
         }
     }
 }

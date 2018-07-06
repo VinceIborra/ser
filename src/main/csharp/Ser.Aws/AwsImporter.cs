@@ -26,20 +26,9 @@ namespace Ser.Aws {
 
     class AwsImporter : IAwsImporter {
 
-        private ObjectCache _cache = null;
-
-        public ObjectCache Cache {
-            get {
-                if (_cache == null) {
-                    _cache = MemoryCache.Default;
-                }
-                return _cache;
-            }
-        }
-
         public IAwsRepository AwsRepository { set; get; } = null;
-
         public IAwsModeller AwsModeller { set; get; } = null;
+        public IAwsModelCache AwsModelCache { set; get; } = null;
 
         //private string GetEc2Info() {
 
