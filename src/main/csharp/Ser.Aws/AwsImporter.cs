@@ -26,93 +26,9 @@ namespace Ser.Aws {
 
     class AwsImporter : IAwsImporter {
 
-        public IAwsRepository AwsRepository { set; get; } = null;
-        public IAwsModeller AwsModeller { set; get; } = null;
-        public IAwsModelCache AwsModelCache { set; get; } = null;
-
-        //private string GetEc2Info() {
-
-        //    StringBuilder sb = new StringBuilder(1024);
-        //    using (StringWriter sr = new StringWriter(sb)) {
-        //        sr.WriteLine("===========================================");
-        //        sr.WriteLine("Welcome to the AWS .NET SDK!");
-        //        sr.WriteLine("===========================================");
-
-        //        // Print the number of Amazon EC2 instances.
-        //        //IAmazonEC2 ec2 = new AmazonEC2Client(this.AwsCredentials, RegionEndpoint.APSoutheast2);
-        //        DescribeInstancesRequest ec2Request = new DescribeInstancesRequest();
-
-        //        try {
-        //            DescribeInstancesResponse ec2Response = this.AwsClient.Ec2Client.DescribeInstances(ec2Request);
-        //            int numInstances = 0;
-        //            numInstances = ec2Response.Reservations.Count;
-        //            sr.WriteLine(string.Format("You have {0} Amazon EC2 instance(s) running in the {1} region.",
-        //                                       numInstances, ConfigurationManager.AppSettings["AWSRegion"]));
-        //        }
-        //        catch (AmazonEC2Exception ex) {
-        //            if (ex.ErrorCode != null && ex.ErrorCode.Equals("AuthFailure")) {
-        //                sr.WriteLine("The account you are using is not signed up for Amazon EC2.");
-        //                sr.WriteLine("You can sign up for Amazon EC2 at http://aws.amazon.com/ec2");
-        //            }
-        //            else {
-        //                sr.WriteLine("Caught Exception: " + ex.Message);
-        //                sr.WriteLine("Response Status Code: " + ex.StatusCode);
-        //                sr.WriteLine("Error Code: " + ex.ErrorCode);
-        //                sr.WriteLine("Error Type: " + ex.ErrorType);
-        //                sr.WriteLine("Request ID: " + ex.RequestId);
-        //            }
-        //        }
-        //        sr.WriteLine();
-
-        //    }
-        //    return sb.ToString();
-        //}
-
-        private void ImportVpcElements(Package pkg) {
-
-            // VPCs
-            IList<Vpc> vpcs = this.AwsRepository.FindVpcAll();
-            foreach (Vpc vpc in vpcs) {
-                this.AwsModeller.createModel(pkg, vpc);
-            }
-
-            // Subnets
-            IList<Amazon.EC2.Model.Subnet> subnets = this.AwsRepository.FindSubnetAll();
-            foreach (Amazon.EC2.Model.Subnet subnet in subnets) {
-                this.AwsModeller.createModel(pkg, subnet);
-            }
-
-            // Route tables
-            IList<RouteTable> routeTables = this.AwsRepository.FindRouteTablesAll();
-            foreach (RouteTable routeTable in routeTables) {
-                this.AwsModeller.createModel(pkg, routeTable);
-            }
-
-            // Internet Gateways
-            IList<InternetGateway> internetGateways = this.AwsRepository.FindInternetGatewaysAll();
-            foreach (InternetGateway internetGateway in internetGateways) {
-                this.AwsModeller.createModel(pkg, internetGateway);
-            }
-
-            // Security Groups
-            IList<SecurityGroup> securityGroups = this.AwsRepository.FindSecurityGroupsAll();
-            foreach (SecurityGroup securityGroup in securityGroups) {
-                this.AwsModeller.createModel(pkg, securityGroup);
-            }
-
-            // Network ACLs
-            IList<NetworkAcl> networkAcls = this.AwsRepository.FindNetworkAclsAll();
-            foreach (NetworkAcl networkAcl in networkAcls) {
-                this.AwsModeller.createModel(pkg, networkAcl);
-            }
-        }
-
-        private void ImportRdsElements(Package pkg) {
-            IList<DBInstance> DbInstances = this.AwsRepository.FindDbInstancesAll();
-            foreach (DBInstance dbInstance in DbInstances) {
-                this.AwsModeller.createModel(pkg, dbInstance);
-            }
-        }
+        public Queue<IWorkItem> WorkItemQueue { set; get; } = null;
+        public IWorkItemFactory WorkItemFactory { set; get; } = null;
+        public IWorkItemProcessor WorkItemProcessor { set; get; } = null;
 
         //private string GetSimpleDBDomainInfo() {
         //    StringBuilder sb = new StringBuilder(1024);
@@ -187,8 +103,18 @@ namespace Ser.Aws {
         //}
 
         public void Import(Package pkg) {
-            this.ImportVpcElements(pkg);
-            this.ImportRdsElements(pkg);
+
+            // Seed the work Item queue
+            IWorkItem seedWorkItem = this.WorkItemFactory.NewSeedWorkItem(pkg);
+            this.WorkItemQueue.Enqueue(seedWorkItem);
+
+            // Process all work items, until we are done
+            while (this.WorkItemQueue.Count > 0) {
+                IWorkItem workItem = this.WorkItemQueue.Dequeue();
+                this.WorkItemProcessor.Process(workItem);
+            }
+
+            //this.ImportRdsElements(pkg);
 
             //string ec2Info = this.GetEc2Info();
             //string simpleDBDomainInfo = this.GetSimpleDBDomainInfo();

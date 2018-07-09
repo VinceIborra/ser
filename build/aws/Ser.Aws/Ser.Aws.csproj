@@ -113,14 +113,68 @@
     <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\AwsModeller.cs">
       <Link>src\Ser.Ea.Addin.Aws\AwsModeller.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\CreateDbInstanceModelWorkItem.cs">
+      <Link>src\Ser.Ea.Addin.Aws\CreateDbInstanceModelWorkItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\CreateNetworkAclModelWorkItem.cs">
+      <Link>src\Ser.Ea.Addin.Aws\CreateNetworkAclModelWorkItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\CreateRouteInternetGatewayWorkItem.cs">
+      <Link>src\Ser.Ea.Addin.Aws\CreateRouteInternetGatewayWorkItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\CreateRouteTableModelWorkItem.cs">
+      <Link>src\Ser.Ea.Addin.Aws\CreateRouteTableModelWorkItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\CreateSecurityGroupModelWorkItem.cs">
+      <Link>src\Ser.Ea.Addin.Aws\CreateSecurityGroupModelWorkItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\CreateSubnetModelWorkItem.cs">
+      <Link>src\Ser.Ea.Addin.Aws\CreateSubnetModelWorkItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\CreateVpcModelWorkItem.cs">
+      <Link>src\Ser.Ea.Addin.Aws\CreateVpcModelWorkItem.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\IAwsModelCache.cs">
       <Link>src\Ser.Ea.Addin.Aws\IAwsModelCache.cs</Link>
     </Compile>
     <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\IAwsModeller.cs">
       <Link>src\Ser.Ea.Addin.Aws\IAwsModeller.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\IWorkItem.cs">
+      <Link>src\Ser.Ea.Addin.Aws\IWorkItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\IWorkItemFactory.cs">
+      <Link>src\Ser.Ea.Addin.Aws\IWorkItemFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\IWorkItemProcessor.cs">
+      <Link>src\Ser.Ea.Addin.Aws\IWorkItemProcessor.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\Main.cs">
       <Link>src\Ser.Ea.Addin.Aws\Main.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\QueryAllDbInstancesWorkItem.cs">
+      <Link>src\Ser.Ea.Addin.Aws\QueryAllDbInstancesWorkItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\QueryAllInternetGatewaysWorkItem.cs">
+      <Link>src\Ser.Ea.Addin.Aws\QueryAllInternetGatewaysWorkItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\QueryAllNetworkAclsWorkItem.cs">
+      <Link>src\Ser.Ea.Addin.Aws\QueryAllNetworkAclsWorkItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\QueryAllRouteTablesWorkItem.cs">
+      <Link>src\Ser.Ea.Addin.Aws\QueryAllRouteTablesWorkItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\QueryAllSecurityGroupsWorkItem.cs">
+      <Link>src\Ser.Ea.Addin.Aws\QueryAllSecurityGroupsWorkItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\QueryAllSubnetsWorkItem.cs">
+      <Link>src\Ser.Ea.Addin.Aws\QueryAllSubnetsWorkItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\QueryAllVpcsWorkItem.cs">
+      <Link>src\Ser.Ea.Addin.Aws\QueryAllVpcsWorkItem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\SeedWorkItem.cs">
+      <Link>src\Ser.Ea.Addin.Aws\SeedWorkItem.cs</Link>
     </Compile>
     <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\SetProfileForm.cs">
       <Link>src\Ser.Ea.Addin.Aws\SetProfileForm.cs</Link>
@@ -129,6 +183,12 @@
     <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\SetProfileForm.designer.cs">
       <Link>src\Ser.Ea.Addin.Aws\SetProfileForm.designer.cs</Link>
       <DependentUpon>SetProfileForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\WorkItemFactory.cs">
+      <Link>src\Ser.Ea.Addin.Aws\WorkItemFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\WorkItemProcessor.cs">
+      <Link>src\Ser.Ea.Addin.Aws\WorkItemProcessor.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
