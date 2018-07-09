@@ -19,10 +19,21 @@
 		<property name="AwsModelCache" ref="AwsModelCacheObj"/>
 	</object>
 
-	<object id="AwsImporterObj" type="Ser.Aws.AwsImporter, Ser.Aws">
+	<object id="WorkItemQueueObj" type="System.Collections.Generic.Queue&lt;Ser.Ea.Addin.Aws.IWorkItem>"/>
+		
+	<object id="WorkItemFactoryObj" type="Ser.Ea.Addin.Aws.WorkItemFactory, Ser.Aws"/>
+
+	<object id="WorkItemProcessorObj" type="Ser.Ea.Addin.Aws.WorkItemProcessor, Ser.Aws">
+		<property name="WorkItemQueue" ref="WorkItemQueueObj"/>
+		<property name="WorkItemFactory" ref="WorkItemFactoryObj"/>
 		<property name="AwsRepository" ref="AwsRepositoryObj"/>
 		<property name="AwsModeller" ref="AwsModellerObj"/>
-		<property name="AwsModelCache" ref="AwsModelCacheObj"/>
+	</object>
+
+	<object id="AwsImporterObj" type="Ser.Aws.AwsImporter, Ser.Aws">
+		<property name="WorkItemQueue" ref="WorkItemQueueObj"/>
+		<property name="WorkItemFactory" ref="WorkItemFactoryObj"/>
+		<property name="WorkItemProcessor" ref="WorkItemProcessorObj"/>
 	</object>
 	
 </objects>
