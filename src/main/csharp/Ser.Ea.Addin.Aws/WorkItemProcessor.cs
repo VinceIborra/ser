@@ -33,9 +33,26 @@ namespace Ser.Ea.Addin.Aws {
         }
 
         public void ProcessQueryAllVpcsWorkItem(QueryAllVpcsWorkItem workItem) {
+
+            // Get information about all Vpcs
             IList<Vpc> vpcs = this.AwsRepository.FindVpcAll();
+
+            // Process each Vpc in turn
             foreach (Vpc vpc in vpcs) {
-                this.WorkItemQueue.Enqueue(this.WorkItemFactory.NewCreateVpcModelWorkItem(workItem.Pkg, vpc));
+
+                // Get additional information for each Vpc
+                bool enableDnsSupport = this.AwsRepository.GetVpcDnsSupportAttribute(vpc.VpcId);
+                bool enableDnsHostnames = this.AwsRepository.GetVpcDnsHostnamesAttribute(vpc.VpcId);
+
+                // Schedule work item to create the corresponding element
+                this.WorkItemQueue.Enqueue(
+                    this.WorkItemFactory.NewCreateVpcModelWorkItem(
+                        workItem.Pkg, 
+                        vpc,
+                        enableDnsSupport,
+                        enableDnsHostnames
+                    )
+                );
             }
         }
 
@@ -87,7 +104,7 @@ namespace Ser.Ea.Addin.Aws {
         }
 
         public void ProcessCreateVpcModelWorkItem(CreateVpcModelWorkItem workItem) {
-            this.AwsModeller.createModel(workItem.Pkg, workItem.Vpc);
+            this.AwsModeller.createModel(workItem.Pkg, workItem.Vpc, workItem.EnableDnsSupport, workItem.EnableDnsHostnames);
         }
         public void ProcessCreateSubnetModelWorkItem(CreateSubnetModelWorkItem workItem) {
             this.AwsModeller.createModel(workItem.Pkg, workItem.Subnet);

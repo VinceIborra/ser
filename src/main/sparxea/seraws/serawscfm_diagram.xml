@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<UMLProfile profiletype="uml2">
+	<Documentation id="E0018315-7" name="CloudFormation" version="1.0" notes="CloudFormation"/>
+	<Content>
+		<Stereotypes>
+			<Stereotype name="CloudFormation" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Diagram_Logical">
+						<Property name="alias" value="CloudFormation"/>
+						<Property name="diagramID" value="cf"/>
+						<Property name="toolbox" value="CloudFormation"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+		</Stereotypes>
+		<TaggedValueTypes/>
+		<ViewDefinitions/>
+		<Metamodel/>
+	</Content>
+</UMLProfile>

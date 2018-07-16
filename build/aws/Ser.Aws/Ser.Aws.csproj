@@ -214,14 +214,15 @@
     <EmbeddedResource Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\log4net.xml">
       <Link>config\log4net.xml</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\Ser.Aws.xml">
-      <Link>config\Ser.Aws.xml</Link>
-    </EmbeddedResource>
     <EmbeddedResource Include="..\..\..\src\main\csharp\Ser.Ea.Addin.Aws\SetProfileForm.resx">
       <Link>src\Ser.Ea.Addin.Aws\SetProfileForm.resx</Link>
       <DependentUpon>SetProfileForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\..\src\main\sparxea\seraws\seraws.xml">
+      <Link>config\seraws.xml</Link>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -60,10 +60,12 @@ namespace Ser.Ea.Addin.Aws {
             return workItem;
         }
 
-        public CreateVpcModelWorkItem NewCreateVpcModelWorkItem(Package pkg, Vpc vpc) {
+        public CreateVpcModelWorkItem NewCreateVpcModelWorkItem(Package pkg, Vpc vpc, bool enableDnsSupport, bool enableDnsHostnames) {
             CreateVpcModelWorkItem workItem = new CreateVpcModelWorkItem();
             workItem.Pkg = pkg;
             workItem.Vpc = vpc;
+            workItem.EnableDnsSupport = enableDnsSupport;
+            workItem.EnableDnsHostnames = enableDnsHostnames;
             return workItem;
         }
 

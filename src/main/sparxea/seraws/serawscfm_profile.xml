@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="windows-1252"?>
 <UMLProfile profiletype="uml2">
-	<Documentation id="73CC3B61-2" name="CloudFormation" version="1.0" notes="CloudFormation"/>
+	<Documentation id="73CC3B61-2" name="SerAwsCfm" version="1.0" notes="SerAwsCfm"/>
 	<Content>
 		<Stereotypes>
 			<Stereotype name="AWS_CloudFormation_Tag" metatype="Tag" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -23,18 +23,18 @@
 				<TaggedValues>
 					<Tag name="AccessControl" type="" description="" unit="" values="" default=""/>
 					<Tag name="BucketName" type="" description="" unit="" values="" default=""/>
-					<Tag name="CorsConfiguration"/>
-					<Tag name="AccelerateConfiguration"/>
-					<Tag name="InventoryConfigurations"/>
-					<Tag name="AnalyticsConfigurations"/>
-					<Tag name="LifecycleConfiguration"/>
 					<Tag name="LoggingConfiguration"/>
+					<Tag name="LifecycleConfiguration"/>
+					<Tag name="CorsConfiguration"/>
 					<Tag name="MetricsConfigurations"/>
+					<Tag name="InventoryConfigurations"/>
 					<Tag name="NotificationConfiguration"/>
 					<Tag name="ReplicationConfiguration"/>
+					<Tag name="AnalyticsConfigurations"/>
+					<Tag name="VersioningConfiguration"/>
+					<Tag name="AccelerateConfiguration"/>
 					<Tag name="Tags"/>
 					<Tag name="WebsiteConfiguration"/>
-					<Tag name="VersioningConfiguration"/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="AWS_S3_Bucket_AbortIncompleteMultipartUpload" metatype="AbortIncompleteMultipartUpload" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -66,8 +66,8 @@
 				<TaggedValues>
 					<Tag name="Id" type="" description="" unit="" values="" default=""/>
 					<Tag name="Prefix" type="" description="" unit="" values="" default=""/>
-					<Tag name="StorageClassAnalysis"/>
 					<Tag name="TagFilters"/>
+					<Tag name="StorageClassAnalysis"/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="AWS_S3_Bucket_CorsConfiguration" metatype="CorsConfiguration" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -209,8 +209,8 @@
 				</AppliesTo>
 				<TaggedValues>
 					<Tag name="QueueConfigurations"/>
-					<Tag name="LambdaConfigurations"/>
 					<Tag name="TopicConfigurations"/>
+					<Tag name="LambdaConfigurations"/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="AWS_S3_Bucket_NotificationFilter" metatype="NotificationFilter" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -283,9 +283,9 @@
 					<Tag name="NoncurrentVersionExpirationInDays" type="" description="" unit="" values="" default=""/>
 					<Tag name="Prefix" type="" description="" unit="" values="" default=""/>
 					<Tag name="Status" type="" description="" unit="" values="" default=""/>
-					<Tag name="Transitions"/>
-					<Tag name="NoncurrentVersionTransitions"/>
 					<Tag name="TagFilters"/>
+					<Tag name="NoncurrentVersionTransitions"/>
+					<Tag name="Transitions"/>
 					<Tag name="AbortIncompleteMultipartUpload"/>
 				</TaggedValues>
 			</Stereotype>
@@ -416,32 +416,45 @@
 					<Tag name="KeyPrefixEquals" type="" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
+			<Stereotype name="CFM_EC2_VPC" metatype="VPC" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="CidrBlock" type="" description="" unit="" values="" default=""/>
+					<Tag name="EnableDnsHostnames" type="Boolean" description="" unit="" values="True,False" default=""/>
+					<Tag name="EnableDnsSupport" type="Boolean" description="" unit="" values="True,False" default=""/>
+					<Tag name="InstanceTenancy" type="enumeration" description="" unit="" values="default,dedicated" default=""/>
+				</TaggedValues>
+			</Stereotype>
 		</Stereotypes>
 		<TaggedValueTypes>
-			<TaggedValueType property="CorsConfiguration" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_CorsConfiguration;"/>
-			<TaggedValueType property="AccelerateConfiguration" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_AccelerateConfiguration;"/>
-			<TaggedValueType property="InventoryConfigurations" description="" notes="Type=RefGUIDList;Stereotypes=AWS_S3_Bucket_InventoryConfiguration;"/>
-			<TaggedValueType property="AnalyticsConfigurations" description="" notes="Type=RefGUIDList;Stereotypes=AWS_S3_Bucket_AnalyticsConfiguration;"/>
-			<TaggedValueType property="LifecycleConfiguration" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_LifecycleConfiguration;"/>
 			<TaggedValueType property="LoggingConfiguration" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_LoggingConfiguration;"/>
+			<TaggedValueType property="LifecycleConfiguration" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_LifecycleConfiguration;"/>
+			<TaggedValueType property="CorsConfiguration" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_CorsConfiguration;"/>
 			<TaggedValueType property="MetricsConfigurations" description="" notes="Type=RefGUIDList;Stereotypes=AWS_S3_Bucket_MetricsConfiguration;"/>
+			<TaggedValueType property="InventoryConfigurations" description="" notes="Type=RefGUIDList;Stereotypes=AWS_S3_Bucket_InventoryConfiguration;"/>
 			<TaggedValueType property="NotificationConfiguration" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_NotificationConfiguration;"/>
 			<TaggedValueType property="ReplicationConfiguration" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_ReplicationConfiguration;"/>
+			<TaggedValueType property="AnalyticsConfigurations" description="" notes="Type=RefGUIDList;Stereotypes=AWS_S3_Bucket_AnalyticsConfiguration;"/>
+			<TaggedValueType property="VersioningConfiguration" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_VersioningConfiguration;"/>
+			<TaggedValueType property="AccelerateConfiguration" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_AccelerateConfiguration;"/>
 			<TaggedValueType property="Tags" description="" notes="Type=RefGUIDList;Stereotypes=AWS_CloudFormation_Tag;"/>
 			<TaggedValueType property="WebsiteConfiguration" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Website_Configuration;"/>
-			<TaggedValueType property="VersioningConfiguration" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_VersioningConfiguration;"/>
-			<TaggedValueType property="StorageClassAnalysis" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_StorageClassAnalysis;"/>
 			<TaggedValueType property="TagFilters" description="" notes="Type=RefGUIDList;Stereotypes=AWS_S3_Bucket_TagFilter;"/>
+			<TaggedValueType property="StorageClassAnalysis" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_StorageClassAnalysis;"/>
 			<TaggedValueType property="CorsRules" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_CorsRule;"/>
 			<TaggedValueType property="Destination" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_Destination;"/>
 			<TaggedValueType property="Filter" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_NotificationFilter;"/>
 			<TaggedValueType property="Rules" description="" notes="Type=RefGUIDList;Stereotypes=AWS_S3_Bucket_Rule;"/>
 			<TaggedValueType property="QueueConfigurations" description="" notes="Type=RefGUIDList;Stereotypes=AWS_S3_Bucket_QueueConfiguration;"/>
-			<TaggedValueType property="LambdaConfigurations" description="" notes="Type=RefGUIDList;Stereotypes=AWS_S3_Bucket_LambdaConfiguration;"/>
 			<TaggedValueType property="TopicConfigurations" description="" notes="Type=RefGUIDList;Stereotypes=AWS_S3_Bucket_TopicConfiguration;"/>
+			<TaggedValueType property="LambdaConfigurations" description="" notes="Type=RefGUIDList;Stereotypes=AWS_S3_Bucket_LambdaConfiguration;"/>
 			<TaggedValueType property="S3Key" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_S3KeyFilter;"/>
-			<TaggedValueType property="Transitions" description="" notes="Type=RefGUIDList;Stereotypes=AWS_S3_Bucket_Transition;"/>
 			<TaggedValueType property="NoncurrentVersionTransitions" description="" notes="Type=RefGUIDList;Stereotypes=AWS_S3_Bucket_NoncurrentVersionTransition;"/>
+			<TaggedValueType property="Transitions" description="" notes="Type=RefGUIDList;Stereotypes=AWS_S3_Bucket_Transition;"/>
 			<TaggedValueType property="AbortIncompleteMultipartUpload" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_AbortIncompleteMultipartUpload;"/>
 			<TaggedValueType property="DataExport" description="" notes="Type=RefGUID;Stereotypes=AWS_S3_Bucket_DataExport;"/>
 			<TaggedValueType property="RoutingRules" description="" notes="Type=RefGUIDList;Stereotypes=AWS_S3_Website_RoutingRule;"/>
