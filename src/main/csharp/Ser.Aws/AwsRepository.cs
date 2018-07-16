@@ -50,6 +50,24 @@ namespace Ser.Aws {
             return aclQueryRsp.NetworkAcls;
         }
 
+        public bool GetVpcDnsSupportAttribute(string vpcId) {
+            var response = this.AwsClient.Ec2Client.DescribeVpcAttribute(new DescribeVpcAttributeRequest {
+                Attribute = "enableDnsSupport",
+                VpcId = vpcId
+            });
+
+            return response.EnableDnsSupport;
+        }
+
+        public bool GetVpcDnsHostnamesAttribute(string vpcId) {
+            var response = this.AwsClient.Ec2Client.DescribeVpcAttribute(new DescribeVpcAttributeRequest {
+                Attribute = "enableDnsHostnames",
+                VpcId = vpcId
+            });
+
+            return response.EnableDnsHostnames;
+        }
+
         public IList<Amazon.EC2.Model.Subnet> FindSubnetsForVpc(string vpcId) {
 
             var response = this.AwsClient.Ec2Client.DescribeSubnets(new DescribeSubnetsRequest {

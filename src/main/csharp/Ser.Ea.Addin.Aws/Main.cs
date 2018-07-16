@@ -80,7 +80,7 @@ namespace Ser.Ea.Addin.Aws {
 
         public object EA_OnInitializeTechnologies(EA.Repository repository) {
             string technology = "";
-            Stream stream = this.Assembly.GetManifestResourceStream("Ser.Ea.Addin.Aws.config.Ser.Aws.xml");
+            Stream stream = this.Assembly.GetManifestResourceStream("Ser.Ea.Addin.Aws.config.seraws.xml");
             try {
                 StreamReader reader = new StreamReader(stream);
                 technology = reader.ReadToEnd();
@@ -104,15 +104,60 @@ namespace Ser.Ea.Addin.Aws {
             //return "hello" + ret.ToString();
             return "hello";
 		}
-		
-		public bool EA_OnPostNewConnector(EA.Repository repository, EA.EventProperties info) {
-			int count = info.Count;
-			EA.EventProperty property = info.Get(0);
-			string str = (string) property.Value;
-			int connectorId = Convert.ToInt32(str);
-			EA.Connector connector = repository.GetConnectorByID(connectorId);
-			connector.Name = "vji";
-            connector.Update();
+
+        public object CgtGenTags(EA.Repository repository, object array) {
+            string tags = "[";
+            string elementGuid = ((string[]) array)[0];
+            string blockIndent = ((string[])array)[1];
+            string indent = ((string[])array)[2];
+            EA.Element element = repository.GetElementByGuid(elementGuid);
+            for (short idx = 0; idx < element.TaggedValues.Count; idx++) {
+                EA.TaggedValue taggedValue = element.TaggedValues.GetAt(idx);
+                if (taggedValue.FQName == null || taggedValue.FQName == "") {
+                    string tagval = blockIndent + indent + "{\"Key\" : \"" + taggedValue.Name + "\", \"Value\" : \"" + taggedValue.Value + "\"}";
+                    tags = tags + "\n" + tagval;
+                }
+            }
+            tags = tags + "\n" + blockIndent + "]"; 
+            return tags;
+        }
+
+        public object MgtGenTags(EA.Repository repository, object array) {
+            string tags = "";
+            string elementGuid = ((string[])array)[0];
+            EA.Element element = repository.GetElementByGuid(elementGuid);
+            for (short idx = 0; idx < element.TaggedValues.Count; idx++) {
+                EA.TaggedValue taggedValue = element.TaggedValues.GetAt(idx);
+                if (taggedValue.FQName == null || taggedValue.FQName == "") {
+                    string tagval = "Tag\n{\nname = \"" + taggedValue.Name + "\"\nvalue = \"" + taggedValue.Value + "\"\n}";
+                    tags = tags + "\n" + tagval;
+                }
+            }
+            tags = tags + "\n";
+            return tags;
+        }
+//Tag
+//{
+//name = %qt%InstanceTenancy%qt%
+//value = %qt%%classTag:"InstanceTenancy"%%qt%
+//}
+//%EXEC_ADD_IN("Ser.Aws", "MgtGenTags", classGUID)%
+
+        /*
+         * {
+  "Key" : String,
+  "Value" : String
+}
+         */
+
+        public bool EA_OnPostNewConnector(EA.Repository repository, EA.EventProperties info) {
+			//int count = info.Count;
+			//EA.EventProperty property = info.Get(0);
+			//string str = (string) property.Value;
+			//int connectorId = Convert.ToInt32(str);
+			//EA.Connector connector = repository.GetConnectorByID(connectorId);
+			//connector.Name = "vji";
+   //         connector.Update();
             
 			return true;
 		}

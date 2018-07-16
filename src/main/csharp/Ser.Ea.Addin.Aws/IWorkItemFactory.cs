@@ -22,7 +22,7 @@ namespace Ser.Ea.Addin.Aws {
         QueryAllNetworkAclsWorkItem NewQueryAllNetworkAclsWorkItem(Package pkg);
         QueryAllDbInstancesWorkItem NewQueryAllDbInstancesWorkItem(Package pkg);
 
-        CreateVpcModelWorkItem NewCreateVpcModelWorkItem(Package pkg, Vpc vpc);
+        CreateVpcModelWorkItem NewCreateVpcModelWorkItem(Package pkg, Vpc vpc, bool enableDnsSupport, bool enableDnsHostnames);
         CreateSubnetModelWorkItem NewCreateSubnetModelWorkItem(Package pkg, Amazon.EC2.Model.Subnet subnet);
         CreateRouteTableModelWorkItem NewCreateRouteTableModelWorkItem(Package pkg, RouteTable routeTable);
         CreateInternetGatewayModelWorkItem NewCreateInternetGatewayModelWorkItem(Package pkg, InternetGateway internetGateway);

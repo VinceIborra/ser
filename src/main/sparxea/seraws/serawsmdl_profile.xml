@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<UMLProfile profiletype="uml2">
+	<Documentation id="D0FA1970-6" name="SerAwsMdl" version="1.0" notes="SerAwsMdl"/>
+	<Content>
+		<Stereotypes>
+			<Stereotype name="MDL_EC2_Vpc" metatype="Vpc" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="VpcId" type="" description="" unit="" values="" default=""/>
+					<Tag name="CidrBlock" type="" description="" unit="" values="" default=""/>
+					<Tag name="EnableDnsSupport" type="Boolean" description="" unit="" values="True,False" default=""/>
+					<Tag name="EnableDnsHostnames" type="Boolean" description="" unit="" values="True,False" default=""/>
+					<Tag name="InstanceTenancy" type="enumeration" description="" unit="" values="dedicated,default,host" default=""/>
+				</TaggedValues>
+			</Stereotype>
+		</Stereotypes>
+		<TaggedValueTypes/>
+		<ViewDefinitions/>
+		<Metamodel/>
+	</Content>
+</UMLProfile>

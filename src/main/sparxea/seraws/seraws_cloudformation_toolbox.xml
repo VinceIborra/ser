@@ -15,14 +15,6 @@
 					<Tag name="CloudFormation::AWS_S3_Website_RoutingRuleCondition(UML::Class)" type="" description="" unit="" values="" default="Routing Rule Condition"/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="AWS:CloudFormation" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
-				<AppliesTo>
-					<Apply type="ToolboxPage"/>
-				</AppliesTo>
-				<TaggedValues>
-					<Tag name="CloudFormation::AWS_CloudFormation_Tag(UML::Class)" type="" description="" unit="" values="" default="Tag"/>
-				</TaggedValues>
-			</Stereotype>
 			<Stereotype name="AWS:S3:Bucket" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="ToolboxPage"/>
@@ -56,6 +48,14 @@
 					<Tag name="CloudFormation::AWS_S3_Bucket_TopicConfiguration(UML::Class)" type="" description="" unit="" values="" default="Topic Configuration"/>
 					<Tag name="CloudFormation::AWS_S3_Bucket_Transition(UML::Class)" type="" description="" unit="" values="" default="Transition"/>
 					<Tag name="CloudFormation::AWS_S3_Bucket_VersioningConfiguration(UML::Class)" type="" description="" unit="" values="" default="Versioning Configuration"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="AWS:CloudFormation" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="ToolboxPage"/>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="CloudFormation::AWS_CloudFormation_Tag(UML::Class)" type="" description="" unit="" values="" default="Tag"/>
 				</TaggedValues>
 			</Stereotype>
 		</Stereotypes>

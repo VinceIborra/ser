@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<UMLProfile profiletype="uml2">
+	<Documentation id="11BA9707-5" name="Aws Model" version="1.0" notes="Aws Model"/>
+	<Content>
+		<Stereotypes>
+			<Stereotype name="EC2" alias="EC2" notes="" cx="0" cy="0" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="ToolboxPage"/>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="SerAwsMdl::MDL_EC2_Vpc(UML::Class)" type="" description="" unit="" values="" default="Vpc"/>
+				</TaggedValues>
+			</Stereotype>
+		</Stereotypes>
+		<TaggedValueTypes/>
+		<ViewDefinitions/>
+		<Metamodel/>
+	</Content>
+</UMLProfile>

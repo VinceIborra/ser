@@ -12,7 +12,7 @@ using EA;
 namespace Ser.Ea.Addin.Aws {
     interface IAwsModeller {
 
-        void createModel(Package pkg, Vpc vpc);
+        void createModel(Package pkg, Vpc vpc, bool enableDnsSupport, bool enableDnsHostnames);
         void createModel(Package pkg, Amazon.EC2.Model.Subnet subnet);
         void createModel(Package pkg, RouteTable rt);
         void createModel(Package pkg, InternetGateway igw);

@@ -26,6 +26,9 @@ namespace Ser.Aws {
         IList<SecurityGroup> FindSecurityGroupsAll();
         IList<NetworkAcl> FindNetworkAclsAll();
 
+        bool GetVpcDnsSupportAttribute(string vpcId);
+        bool GetVpcDnsHostnamesAttribute(string vpcId);
+
         IList<Amazon.EC2.Model.Subnet> FindSubnetsForVpc(string vpcId);
 
         IList<DBInstance> FindDbInstancesAll();

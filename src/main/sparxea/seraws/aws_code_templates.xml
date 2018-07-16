@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<RefData version="1.0" exporter="EA.25">
+	<DataSet name="AWS_Code_Template" table="t_template" filter="TemplateType='#TemplateType#' and TemplateName='#TemplateName#' and Style='#Style#'" stoplist=";TemplateID;">
+		<DataRow>
+			<Column name="TemplateID" value="{23B53679-09D3-419b-8C63-35100FFE50B1}"/>
+			<Column name="TemplateType" value="AWS_Code_Template"/>
+			<Column name="TemplateName" value="File"/>
+			<Column name="Template" value="%list=&quot;Class&quot; @separator=&quot;\n\n&quot;%"/>
+		</DataRow>
+		<DataRow>
+			<Column name="TemplateID" value="{6E5047C8-8C41-499b-A2B4-D2656811D04D}"/>
+			<Column name="TemplateType" value="AWS_Code_Template"/>
+			<Column name="TemplateName" value="Class"/>
+		</DataRow>
+		<DataRow>
+			<Column name="TemplateID" value="{38C68E24-96C7-46d3-B06C-0B44E2DF2A0D}"/>
+			<Column name="TemplateType" value="AWS_Code_Template"/>
+			<Column name="TemplateName" value="Linked Attribute"/>
+			<Column name="Template" value="linked_att - %linkAttName%"/>
+		</DataRow>
+		<DataRow>
+			<Column name="TemplateID" value="{42006735-8FB5-4835-8C65-A627CEEEEDAC}"/>
+			<Column name="TemplateType" value="AWS_Code_Template"/>
+			<Column name="TemplateName" value="Attribute"/>
+			<Column name="Template" value="%if attIsID==&quot;F&quot;%&#xA;%attName%&#xA;%endIf%&#xA;%linkedAttribute%"/>
+		</DataRow>
+		<DataRow>
+			<Column name="TemplateID" value="{3F5A3629-51B9-4d9c-9180-CB08575C1DFB}"/>
+			<Column name="TemplateType" value="AWS_Code_Template"/>
+			<Column name="TemplateName" value="Class Body"/>
+		</DataRow>
+		<DataRow>
+			<Column name="TemplateID" value="{1911C8B5-7525-41a0-B39A-FA4581CBB57F}"/>
+			<Column name="TemplateType" value="AWS_Code_Template"/>
+			<Column name="TemplateName" value="Connector__VJI"/>
+			<Column name="Template" value="%classTag:&quot;tag1&quot;%&#xA;%classTag:&quot;tag2&quot;%&#xA;%classTag:&quot;tag3&quot;%&#xA;%classTag:&quot;tag4&quot;%&#xA;&#xA;%if connectorSourceElemName == className%&#xA;%endTemplate%&#xA;%endIf%&#xA;&#xA;connectorSourceRole = %connectorSourceRole%&#xA;connectorSourceElemName = %connectorSourceElemName%"/>
+		</DataRow>
+		<DataRow>
+			<Column name="TemplateID" value="{1E438143-E09A-403a-8FFA-3D3259C4EB01}"/>
+			<Column name="TemplateType" value="AWS_Code_Template"/>
+			<Column name="TemplateName" value="Class Impl"/>
+			<Column name="Template" value="$GUID = $parameter1&#xA;hello = $GUID "/>
+		</DataRow>
+		<DataRow>
+			<Column name="TemplateID" value="{AD409561-9449-43ae-A1EA-947D0B82D030}"/>
+			<Column name="TemplateType" value="AWS_Code_Template"/>
+			<Column name="TemplateName" value="Class"/>
+			<Column name="Style" value="CS=AWS_S3_Bucket;"/>
+			<Column name="Template" value="$websiteConfiguration = %classTag:&quot;WebsiteConfiguration&quot;%&#xA;%qt%%className%%qt% : {&#xA;    %qt%Type%qt% : %qt%AWS::S3::Bucket%qt%,&#xA;	%qt%Properties%qt% : {&#xA;	    %qt%AccessControl%qt% : %qt%%classTag:&quot;AccessControl&quot;%%qt%,&#xA;		%qt%WebsiteConfiguration%qt% : %EXEC_ADD_IN(&quot;AWS&quot;,&quot;ProcessOperation&quot;,$websiteConfiguration)%&#xA;    }&#xA;}"/>
+		</DataRow>
+		<DataRow>
+			<Column name="TemplateID" value="{0FB4AE58-B18E-419f-BCBB-854D12C157FD}"/>
+			<Column name="TemplateType" value="AWS_Code_Template"/>
+			<Column name="TemplateName" value="Class"/>
+			<Column name="Style" value="CS=AWS_S3_Website_Configuration;"/>
+			<Column name="Template" value="{&#xA;    %qt%ErrorDocument%qt% : %qt%%classTag:&quot;ErrorDocument&quot;%%qt%,&#xA;	%qt%IndexDocument%qt% : %qt%%classTag:&quot;IndexDocument&quot;%%qt%,&#xA;}"/>
+		</DataRow>
+	</DataSet>
+</RefData>
