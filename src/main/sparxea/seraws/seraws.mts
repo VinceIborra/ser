@@ -4,6 +4,9 @@
 	<CodeMods>
 		<CodeMod product="CloudFormation" codetypes="0" codetemplates="1" grammar="" codeoptions=""/>
 	</CodeMods>
+	<Transforms>
+		<Transform product="CloudFormation" codetypes="0" codetemplates="1" grammar="" codeoptions=""/>
+	</Transforms>
 	<DiagramProfile directory="C:\Users\vji\source\repos\ser\src\main\sparxea\seraws" files="serawscfm_diagram.xml,serawsmdl_diagram.xml"/>
 	<UIToolboxes directory="C:\Users\vji\source\repos\ser\src\main\sparxea\seraws" files="serawscfm_toolbox.xml,serawsmdl_toolbox.xml"/>
 </MDG.Selections>
