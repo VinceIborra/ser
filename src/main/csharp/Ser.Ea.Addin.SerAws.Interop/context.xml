@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+	
+	<object id="AwsClientObj" type="Ser.Aws.AwsClientImpl, Ser.Aws"/>
+
+	<object id="SetProfileFormObj" type="Ser.Ea.Addin.SerAws.SetProfileForm, Ser.Ea.Addin.SerAws">
+		<property name="AwsClient" ref="AwsClientObj"/>
+	</object>
+
+	<object id="AwsRepositoryObj" type="Ser.Aws.AwsRepositoryImpl, Ser.Aws">
+		<property name="AwsClient" ref="AwsClientObj"/>
+	</object>
+
+	<object id="AwsModelCacheObj" type="Ser.Ea.Addin.SerAws.AwsModelCacheImpl, Ser.Ea.Addin.SerAws"/>
+	
+	<object id="AwsModellerObj" type="Ser.Ea.Addin.SerAws.AwsModellerImpl, Ser.Ea.Addin.SerAws">
+		<property name="AwsModelCache" ref="AwsModelCacheObj"/>
+	</object>
+
+	<object id="WorkItemQueueObj" type="System.Collections.Generic.Queue&lt;Ser.Ea.Addin.SerAws.WorkItem>"/>
+		
+	<object id="WorkItemFactoryObj" type="Ser.Ea.Addin.SerAws.WorkItemFactoryImpl, Ser.Ea.Addin.SerAws"/>
+
+	<object id="WorkItemProcessorObj" type="Ser.Ea.Addin.SerAws.WorkItemProcessorImpl, Ser.Ea.Addin.SerAws">
+		<property name="WorkItemQueue" ref="WorkItemQueueObj"/>
+		<property name="WorkItemFactory" ref="WorkItemFactoryObj"/>
+		<property name="AwsRepository" ref="AwsRepositoryObj"/>
+		<property name="AwsModeller" ref="AwsModellerObj"/>
+	</object>
+
+	<object id="AboutFormObj" type="Ser.Ea.Addin.SerAws.AboutForm, Ser.Ea.Addin.SerAws"/>
+
+	<object id="TagToolsObj" type="Ser.Ea.Addin.SerAws.TagToolsImpl, Ser.Ea.Addin.SerAws"/>
+		
+	<object id="AwsImporterObj" type="Ser.Ea.Addin.SerAws.AwsImporterImpl, Ser.Ea.Addin.SerAws">
+		<property name="WorkItemQueue" ref="WorkItemQueueObj"/>
+		<property name="WorkItemFactory" ref="WorkItemFactoryObj"/>
+		<property name="WorkItemProcessor" ref="WorkItemProcessorObj"/>
+	</object>
+
+	<object id="MdgFileResouceObj" type="Spring.Core.IO.AssemblyResource">
+		<constructor-arg type="string" value="assembly://Ser.Ea.Addin.SerAws.Interop/Ser.Ea.Addin.SerAws.Interop/seraws.xml"/>
+	</object>
+	
+	<object id="AddinMainObj" type="Ser.Ea.Addin.SerAws.SerAwsAddinMainImpl">
+		<property name="MdgFileResource" ref="MdgFileResouceObj"/> 
+		<property name="TagTools" ref="TagToolsObj"/>
+		<property name="AwsImporter" ref="AwsImporterObj"/>
+		<property name="SetProfileForm" ref="SetProfileFormObj"/>
+		<property name="AboutForm" ref="AboutFormObj"/>
+	</object>
+	
+</objects>
