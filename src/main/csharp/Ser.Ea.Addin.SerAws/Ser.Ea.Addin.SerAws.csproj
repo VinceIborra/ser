@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BA7B107E-5824-4C33-AD7B-5C9296657157}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ser.Ea.Addin.SerAws</RootNamespace>
+    <AssemblyName>Ser.Ea.Addin.SerAws</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AWSSDK.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\build\SerAws\packages\AWSSDK.Core.3.3.25.2\lib\net45\AWSSDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.EC2, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\build\SerAws\packages\AWSSDK.EC2.3.3.59.2\lib\net45\AWSSDK.EC2.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.RDS, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\build\SerAws\packages\AWSSDK.RDS.3.3.27.7\lib\net45\AWSSDK.RDS.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.S3, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\build\SerAws\packages\AWSSDK.S3.3.3.23.1\lib\net45\AWSSDK.S3.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.SimpleDB, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\build\SerAws\packages\AWSSDK.SimpleDB.3.3.0.39\lib\net45\AWSSDK.SimpleDB.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\build\SerAws\packages\Common.Logging.3.0.0\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\build\SerAws\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.EA">
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Sparx Systems\EA\Interop.EA.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Spring.Core, Version=2.0.1.45000, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\build\SerAws\packages\Spring.Core.2.0.1\lib\net45\Spring.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SerAwsAddinMainImpl.cs" />
+    <Compile Include="AwsImporterImpl.cs" />
+    <Compile Include="AwsModelCacheImpl.cs" />
+    <Compile Include="AwsModellerImpl.cs" />
+    <Compile Include="SerAwsAddinMain.cs" />
+    <Compile Include="TagTools.cs" />
+    <Compile Include="TagToolsImpl.cs" />
+    <Compile Include="CreateDbInstanceModelWorkItemImpl.cs" />
+    <Compile Include="CreateNetworkAclModelWorkItemImpl.cs" />
+    <Compile Include="CreateRouteInternetGatewayWorkItemImpl.cs" />
+    <Compile Include="CreateRouteTableModelWorkItemImpl.cs" />
+    <Compile Include="CreateSecurityGroupModelWorkItemImpl.cs" />
+    <Compile Include="CreateSubnetModelWorkItemImpl.cs" />
+    <Compile Include="CreateVpcModelWorkItemImpl.cs" />
+    <Compile Include="AwsImporter.cs" />
+    <Compile Include="AwsModelCache.cs" />
+    <Compile Include="AwsModeller.cs" />
+    <Compile Include="WorkItem.cs" />
+    <Compile Include="WorkItemFactory.cs" />
+    <Compile Include="WorkItemProcessor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryAllDbInstancesWorkItemImpl.cs" />
+    <Compile Include="QueryAllInternetGatewaysWorkItemImpl.cs" />
+    <Compile Include="QueryAllNetworkAclsWorkItemImpl.cs" />
+    <Compile Include="QueryAllRouteTablesWorkItemImpl.cs" />
+    <Compile Include="QueryAllSecurityGroupsWorkItemImpl.cs" />
+    <Compile Include="QueryAllSubnetsWorkItemImpl.cs" />
+    <Compile Include="QueryAllVpcsWorkItemImpl.cs" />
+    <Compile Include="SeedWorkItemImpl.cs" />
+    <Compile Include="SetProfileForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetProfileForm.Designer.cs">
+      <DependentUpon>SetProfileForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorkItemFactoryImpl.cs" />
+    <Compile Include="WorkItemProcessorImpl.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SetProfileForm.resx">
+      <DependentUpon>SetProfileForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ser.Aws\Ser.Aws.csproj">
+      <Project>{40cd69e5-69a2-4f37-94b7-15a892dfa25c}</Project>
+      <Name>Ser.Aws</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ser.Ea.Addin\Ser.Ea.Addin.csproj">
+      <Project>{8c634acf-1315-4d78-a8ea-da56b5649303}</Project>
+      <Name>Ser.Ea.Addin</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\..\..\build\SerAws\packages\AWSSDK.EC2.3.3.59.2\analyzers\dotnet\cs\AWSSDK.EC2.CodeAnalysis.dll" />
+    <Analyzer Include="..\..\..\..\build\SerAws\packages\AWSSDK.RDS.3.3.27.7\analyzers\dotnet\cs\AWSSDK.RDS.CodeAnalysis.dll" />
+    <Analyzer Include="..\..\..\..\build\SerAws\packages\AWSSDK.S3.3.3.23.1\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
+    <Analyzer Include="..\..\..\..\build\SerAws\packages\AWSSDK.SimpleDB.3.3.0.39\analyzers\dotnet\cs\AWSSDK.SimpleDB.CodeAnalysis.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
